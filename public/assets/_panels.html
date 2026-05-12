@@ -1,0 +1,103 @@
+<!-- ACCESSIBILITY FAB + PANEL -->
+<button class="a11y-fab" id="a11y-fab" aria-label="Open accessibility menu" aria-expanded="false" aria-controls="a11y-panel">
+  <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+    <circle cx="12" cy="12" r="10"/>
+    <circle cx="12" cy="7.5" r="1.3" fill="currentColor"/>
+    <path d="M8 11h8"/>
+    <path d="M12 11v4"/>
+    <path d="m9 19 3-4 3 4"/>
+  </svg>
+</button>
+
+<div class="a11y-panel" id="a11y-panel" role="dialog" aria-labelledby="a11y-title" aria-modal="false">
+  <div class="head">
+    <h3 id="a11y-title">Accessibility</h3>
+    <button class="close" id="a11y-close" aria-label="Close accessibility menu">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg>
+    </button>
+  </div>
+
+  <div class="row">
+    <div class="lab"><span class="ico" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7h10M9 7v10M17 17h4M19 17l2-6-2 6-2-6 2 6"/></svg></span>Text size</div>
+    <div class="ctrl">
+      <button class="step" data-act="fs-down" aria-label="Decrease text size">−</button>
+      <span class="val" id="a11y-fs-val">100%</span>
+      <button class="step" data-act="fs-up" aria-label="Increase text size">+</button>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="lab"><span class="ico" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M3 12h18M3 18h12"/></svg></span>Letter & line spacing</div>
+    <button class="a11y-toggle" data-toggle="spacing" role="switch" aria-checked="false" aria-label="Toggle spacing"></button>
+  </div>
+
+  <div class="row">
+    <div class="lab"><span class="ico" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 4h12M6 20h12M8 4v16M16 4v16M10 8h4M10 12h4M10 16h4"/></svg></span>Readable font</div>
+    <button class="a11y-toggle" data-toggle="font" role="switch" aria-checked="false" aria-label="Use readable font"></button>
+  </div>
+
+  <div class="row">
+    <div class="lab"><span class="ico" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 2v20"/><path d="M12 2a10 10 0 0 0 0 20z" fill="currentColor"/></svg></span>High contrast</div>
+    <button class="a11y-toggle" data-toggle="contrast" role="switch" aria-checked="false" aria-label="Toggle high contrast"></button>
+  </div>
+
+  <div class="row">
+    <div class="lab"><span class="ico" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg></span>Invert colors</div>
+    <button class="a11y-toggle" data-toggle="invert" role="switch" aria-checked="false" aria-label="Invert colors"></button>
+  </div>
+
+  <div class="row">
+    <div class="lab"><span class="ico" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/></svg></span>Grayscale</div>
+    <button class="a11y-toggle" data-toggle="grayscale" role="switch" aria-checked="false" aria-label="Toggle grayscale"></button>
+  </div>
+
+  <div class="row">
+    <div class="lab"><span class="ico" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7 0l3-3a5 5 0 0 0-7-7l-1 1"/><path d="M14 11a5 5 0 0 0-7 0l-3 3a5 5 0 0 0 7 7l1-1"/></svg></span>Highlight links</div>
+    <button class="a11y-toggle" data-toggle="links" role="switch" aria-checked="false" aria-label="Highlight links"></button>
+  </div>
+
+  <div class="row">
+    <div class="lab"><span class="ico" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5v14"/></svg></span>Reading guide</div>
+    <button class="a11y-toggle" data-toggle="guide" role="switch" aria-checked="false" aria-label="Toggle reading guide"></button>
+  </div>
+
+  <div class="row">
+    <div class="lab"><span class="ico" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span>Pause animations</div>
+    <button class="a11y-toggle" data-toggle="motion" role="switch" aria-checked="false" aria-label="Pause animations"></button>
+  </div>
+
+  <div class="row">
+    <div class="lab"><span class="ico" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m3 3 7 18 2-8 8-2z"/></svg></span>Large cursor</div>
+    <button class="a11y-toggle" data-toggle="cursor" role="switch" aria-checked="false" aria-label="Large cursor"></button>
+  </div>
+
+  <button class="a11y-reset" id="a11y-reset">Reset accessibility</button>
+</div>
+
+<!-- TWEAKS PANEL -->
+<div class="tweaks" id="tweaks">
+  <h4>Tweaks</h4>
+  <div class="group">
+    <label>Accent</label>
+    <div class="opts" data-key="accent">
+      <button class="opt" data-val="green"><span class="swatch" style="background:#74be43"></span>Vedanta Green</button>
+      <button class="opt" data-val="blue"><span class="swatch" style="background:#0063a7"></span>Vedanta Blue</button>
+      <button class="opt" data-val="copper"><span class="swatch" style="background:#b8622c"></span>Copper</button>
+      <button class="opt" data-val="coral"><span class="swatch" style="background:#d94f3d"></span>Sterlite Coral</button>
+    </div>
+  </div>
+  <div class="group">
+    <label>Density</label>
+    <div class="opts" data-key="density">
+      <button class="opt" data-val="default">Default</button>
+      <button class="opt" data-val="compact">Compact</button>
+    </div>
+  </div>
+  <div class="group">
+    <label>Theme</label>
+    <div class="opts" data-key="theme">
+      <button class="opt" data-val="light">Light</button>
+      <button class="opt" data-val="dark">Dark</button>
+    </div>
+  </div>
+</div>

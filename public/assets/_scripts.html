@@ -1,0 +1,343 @@
+
+
+<!-- ACCESSIBILITY FAB + PANEL -->
+<button class="a11y-fab" id="a11y-fab" aria-label="Open accessibility menu" aria-expanded="false" aria-controls="a11y-panel">
+  <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+    <circle cx="12" cy="12" r="10"/>
+    <circle cx="12" cy="7.5" r="1.3" fill="currentColor"/>
+    <path d="M8 11h8"/>
+    <path d="M12 11v4"/>
+    <path d="m9 19 3-4 3 4"/>
+  </svg>
+</button>
+
+<div class="a11y-panel" id="a11y-panel" role="dialog" aria-labelledby="a11y-title" aria-modal="false">
+  <div class="head">
+    <h3 id="a11y-title">Accessibility</h3>
+    <button class="close" id="a11y-close" aria-label="Close accessibility menu">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg>
+    </button>
+  </div>
+
+  <div class="row">
+    <div class="lab"><span class="ico" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7h10M9 7v10M17 17h4M19 17l2-6-2 6-2-6 2 6"/></svg></span>Text size</div>
+    <div class="ctrl">
+      <button class="step" data-act="fs-down" aria-label="Decrease text size">−</button>
+      <span class="val" id="a11y-fs-val">100%</span>
+      <button class="step" data-act="fs-up" aria-label="Increase text size">+</button>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="lab"><span class="ico" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M3 12h18M3 18h12"/></svg></span>Letter & line spacing</div>
+    <button class="a11y-toggle" data-toggle="spacing" role="switch" aria-checked="false" aria-label="Toggle spacing"></button>
+  </div>
+
+  <div class="row">
+    <div class="lab"><span class="ico" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 4h12M6 20h12M8 4v16M16 4v16M10 8h4M10 12h4M10 16h4"/></svg></span>Readable font</div>
+    <button class="a11y-toggle" data-toggle="font" role="switch" aria-checked="false" aria-label="Use readable font"></button>
+  </div>
+
+  <div class="row">
+    <div class="lab"><span class="ico" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 2v20"/><path d="M12 2a10 10 0 0 0 0 20z" fill="currentColor"/></svg></span>High contrast</div>
+    <button class="a11y-toggle" data-toggle="contrast" role="switch" aria-checked="false" aria-label="Toggle high contrast"></button>
+  </div>
+
+  <div class="row">
+    <div class="lab"><span class="ico" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg></span>Invert colors</div>
+    <button class="a11y-toggle" data-toggle="invert" role="switch" aria-checked="false" aria-label="Invert colors"></button>
+  </div>
+
+  <div class="row">
+    <div class="lab"><span class="ico" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/></svg></span>Grayscale</div>
+    <button class="a11y-toggle" data-toggle="grayscale" role="switch" aria-checked="false" aria-label="Toggle grayscale"></button>
+  </div>
+
+  <div class="row">
+    <div class="lab"><span class="ico" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7 0l3-3a5 5 0 0 0-7-7l-1 1"/><path d="M14 11a5 5 0 0 0-7 0l-3 3a5 5 0 0 0 7 7l1-1"/></svg></span>Highlight links</div>
+    <button class="a11y-toggle" data-toggle="links" role="switch" aria-checked="false" aria-label="Highlight links"></button>
+  </div>
+
+  <div class="row">
+    <div class="lab"><span class="ico" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5v14"/></svg></span>Reading guide</div>
+    <button class="a11y-toggle" data-toggle="guide" role="switch" aria-checked="false" aria-label="Toggle reading guide"></button>
+  </div>
+
+  <div class="row">
+    <div class="lab"><span class="ico" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span>Pause animations</div>
+    <button class="a11y-toggle" data-toggle="motion" role="switch" aria-checked="false" aria-label="Pause animations"></button>
+  </div>
+
+  <div class="row">
+    <div class="lab"><span class="ico" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m3 3 7 18 2-8 8-2z"/></svg></span>Large cursor</div>
+    <button class="a11y-toggle" data-toggle="cursor" role="switch" aria-checked="false" aria-label="Large cursor"></button>
+  </div>
+
+  <button class="a11y-reset" id="a11y-reset">Reset accessibility</button>
+</div>
+
+<!-- TWEAKS PANEL -->
+<div class="tweaks" id="tweaks">
+  <h4>Tweaks</h4>
+  <div class="group">
+    <label>Accent</label>
+    <div class="opts" data-key="accent">
+      <button class="opt" data-val="green"><span class="swatch" style="background:#74be43"></span>Vedanta Green</button>
+      <button class="opt" data-val="blue"><span class="swatch" style="background:#0063a7"></span>Vedanta Blue</button>
+      <button class="opt" data-val="copper"><span class="swatch" style="background:#b8622c"></span>Copper</button>
+      <button class="opt" data-val="coral"><span class="swatch" style="background:#d94f3d"></span>Sterlite Coral</button>
+    </div>
+  </div>
+  <div class="group">
+    <label>Density</label>
+    <div class="opts" data-key="density">
+      <button class="opt" data-val="default">Default</button>
+      <button class="opt" data-val="compact">Compact</button>
+    </div>
+  </div>
+  <div class="group">
+    <label>Theme</label>
+    <div class="opts" data-key="theme">
+      <button class="opt" data-val="light">Light</button>
+      <button class="opt" data-val="dark">Dark</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  /* India map — generate dot stipple similar to Figma's 3671 small circles.
+     We read a shape path for the India outline and stipple-fill it. */
+  (function(){
+    // Simple approximation: sample points inside a rough polygon outline.
+    // We use a canvas mask approach: draw a path and sample grid points.
+    const map = document.getElementById('india-map');
+    const W = 902, H = 1017;
+    const svgNS = 'http://www.w3.org/2000/svg';
+    const svg = document.createElementNS(svgNS, 'svg');
+    svg.setAttribute('viewBox', `0 0 ${W} ${H}`);
+    svg.setAttribute('preserveAspectRatio','xMidYMid meet');
+    // India outline (simplified approximation, normalized to 902x1017)
+    const path = 'M 442 50 C 455 45 470 50 480 65 C 495 55 520 50 540 60 C 555 48 580 55 595 75 C 615 65 640 70 650 95 C 665 85 685 95 680 120 C 700 130 715 155 700 180 C 720 200 725 230 705 260 C 720 290 710 325 690 345 C 705 375 685 405 665 420 C 680 450 660 485 625 490 C 630 525 610 560 575 575 C 580 620 555 665 515 685 C 520 735 490 785 445 810 C 460 855 445 910 395 935 C 400 975 360 1000 310 985 C 270 960 245 910 260 865 C 220 830 215 780 240 740 C 210 720 195 680 215 645 C 190 625 175 585 200 550 C 175 525 165 480 195 445 C 170 420 170 375 210 355 C 200 320 225 285 265 280 C 260 240 290 200 335 195 C 345 155 385 130 430 140 C 425 95 440 55 442 50 Z';
+    const mask = document.createElementNS(svgNS, 'path');
+    mask.setAttribute('d', path);
+    mask.setAttribute('id','india-outline');
+    mask.setAttribute('fill','rgba(116,190,67,0.04)');
+    mask.setAttribute('stroke','rgba(116,190,67,0.15)');
+    mask.setAttribute('stroke-width','1');
+    svg.appendChild(mask);
+    // Use <clipPath> for stippling
+    const defs = document.createElementNS(svgNS,'defs');
+    const clip = document.createElementNS(svgNS,'clipPath');
+    clip.setAttribute('id','india-clip');
+    const cp = document.createElementNS(svgNS,'path');
+    cp.setAttribute('d', path);
+    clip.appendChild(cp);
+    defs.appendChild(clip);
+    svg.appendChild(defs);
+    const g = document.createElementNS(svgNS,'g');
+    g.setAttribute('clip-path','url(#india-clip)');
+    const step = 14;
+    for (let y = 0; y < H; y += step) {
+      for (let x = 0; x < W; x += step) {
+        const dx = x + (Math.random()-0.5)*3;
+        const dy = y + (Math.random()-0.5)*3;
+        const c = document.createElementNS(svgNS,'circle');
+        c.setAttribute('cx',dx); c.setAttribute('cy',dy);
+        c.setAttribute('r', 2.4);
+        c.setAttribute('fill','rgba(10,10,10,0.12)');
+        g.appendChild(c);
+      }
+    }
+    svg.appendChild(g);
+    map.prepend(svg);
+  })();
+
+  /* Tweaks */
+  (function(){
+    const panel = document.getElementById('tweaks');
+    const body = document.body;
+    const state = Object.assign({accent:'green',density:'default',theme:'light'}, window.TWEAKS||{});
+
+    function apply() {
+      body.dataset.accent = state.accent;
+      body.dataset.density = state.density;
+      body.dataset.theme = state.theme;
+      panel.querySelectorAll('.opts').forEach(g => {
+        const k = g.dataset.key;
+        g.querySelectorAll('.opt').forEach(o => {
+          o.classList.toggle('active', o.dataset.val === state[k]);
+        });
+      });
+    }
+
+    panel.querySelectorAll('.opt').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const k = btn.parentElement.dataset.key;
+        state[k] = btn.dataset.val;
+        apply();
+        try {
+          window.parent.postMessage({type:'__edit_mode_set_keys', edits: {[k]: btn.dataset.val}}, '*');
+        } catch (e) {}
+      });
+    });
+
+    window.addEventListener('message', (e) => {
+      if (!e.data) return;
+      if (e.data.type === '__activate_edit_mode') panel.classList.add('on');
+      if (e.data.type === '__deactivate_edit_mode') panel.classList.remove('on');
+    });
+
+    try { window.parent.postMessage({type:'__edit_mode_available'}, '*'); } catch(e){}
+
+    apply();
+  })();
+
+  /* Scroll reveals */
+  (function(){
+    const targets = document.querySelectorAll('[data-reveal], .reveal, .reveal-scale, .reveal-left, .reveal-right');
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+    targets.forEach(t => io.observe(t));
+  })();
+
+  /* Nav scroll shadow */
+  (function(){
+    const nav = document.querySelector('.nav');
+    const onScroll = () => nav.classList.toggle('scrolled', window.scrollY > 12);
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+  })();
+
+  /* Parallax on hero */
+  (function(){
+    const hero = document.querySelector('.hero');
+    if (!hero) return;
+    let raf = null;
+    window.addEventListener('scroll', () => {
+      if (raf) return;
+      raf = requestAnimationFrame(() => {
+        const y = Math.min(window.scrollY * 0.3, 200);
+        hero.style.backgroundPosition = `center calc(50% + ${y}px)`;
+        raf = null;
+      });
+    }, { passive: true });
+  })();
+
+  /* Count-up on scale band */
+  (function(){
+    const cells = document.querySelectorAll('.scale-cell .n');
+    const ease = t => 1 - Math.pow(1 - t, 3);
+    const animate = (el) => {
+      const txt = el.textContent;
+      const m = txt.match(/([\d.]+)/);
+      if (!m) return;
+      const target = parseFloat(m[1]);
+      const suffix = txt.slice(m.index + m[0].length);
+      const prefix = txt.slice(0, m.index);
+      const dur = 1400;
+      const start = performance.now();
+      const step = (now) => {
+        const p = Math.min((now - start) / dur, 1);
+        const v = target * ease(p);
+        const display = target % 1 === 0 ? Math.round(v).toString() : v.toFixed(1);
+        el.innerHTML = prefix + display + suffix;
+        if (p < 1) requestAnimationFrame(step);
+      };
+      requestAnimationFrame(step);
+    };
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) { animate(e.target); io.unobserve(e.target); } });
+    }, { threshold: 0.5 });
+    cells.forEach(c => io.observe(c));
+  })();
+</script>
+
+<script>
+/* ——— Accessibility menu ——— */
+(function(){
+  const root = document.documentElement;
+  const fab = document.getElementById('a11y-fab');
+  const panel = document.getElementById('a11y-panel');
+  const closeBtn = document.getElementById('a11y-close');
+  const resetBtn = document.getElementById('a11y-reset');
+  const fsVal = document.getElementById('a11y-fs-val');
+  const guideTop = document.querySelector('.a11y-guide.top');
+  const guideBot = document.querySelector('.a11y-guide.bot');
+
+  const STORAGE_KEY = 'sterlite-a11y';
+  const DEFAULTS = { scale: 1, spacing: 0, font: 0, contrast: 0, invert: 0, grayscale: 0, links: 0, guide: 0, motion: 0, cursor: 0 };
+  let state = Object.assign({}, DEFAULTS, JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}'));
+
+  function save(){ localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); }
+
+  function apply() {
+    root.style.setProperty('--a11y-scale', state.scale);
+    root.setAttribute('data-a11y-scale', '1');
+    fsVal.textContent = Math.round(state.scale * 100) + '%';
+
+    ['spacing','font','contrast','invert','grayscale','links','guide','motion','cursor'].forEach(k => {
+      if (state[k]) root.setAttribute('data-a11y-'+k, '1'); else root.removeAttribute('data-a11y-'+k);
+      const t = panel.querySelector(`[data-toggle="${k}"]`);
+      if (t) {
+        t.classList.toggle('on', !!state[k]);
+        t.setAttribute('aria-checked', state[k] ? 'true' : 'false');
+      }
+    });
+
+    // Step buttons disabled state
+    panel.querySelector('[data-act="fs-down"]').disabled = state.scale <= 0.85;
+    panel.querySelector('[data-act="fs-up"]').disabled = state.scale >= 1.6;
+  }
+
+  function openPanel(open) {
+    panel.classList.toggle('on', open);
+    fab.setAttribute('aria-expanded', open ? 'true' : 'false');
+    if (open) closeBtn.focus();
+  }
+
+  fab.addEventListener('click', () => openPanel(!panel.classList.contains('on')));
+  closeBtn.addEventListener('click', () => { openPanel(false); fab.focus(); });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && panel.classList.contains('on')) { openPanel(false); fab.focus(); }
+  });
+  document.addEventListener('click', (e) => {
+    if (!panel.classList.contains('on')) return;
+    if (!panel.contains(e.target) && !fab.contains(e.target)) openPanel(false);
+  });
+
+  panel.querySelectorAll('[data-toggle]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const k = btn.dataset.toggle;
+      state[k] = state[k] ? 0 : 1;
+      save(); apply();
+    });
+  });
+
+  panel.querySelector('[data-act="fs-up"]').addEventListener('click', () => {
+    state.scale = Math.min(1.6, +(state.scale + 0.1).toFixed(2));
+    save(); apply();
+  });
+  panel.querySelector('[data-act="fs-down"]').addEventListener('click', () => {
+    state.scale = Math.max(0.85, +(state.scale - 0.1).toFixed(2));
+    save(); apply();
+  });
+
+  resetBtn.addEventListener('click', () => {
+    state = Object.assign({}, DEFAULTS);
+    save(); apply();
+  });
+
+  // Reading guide follows cursor
+  document.addEventListener('mousemove', (e) => {
+    if (!state.guide) return;
+    const y = e.clientY;
+    guideTop.style.height = Math.max(0, y - 40) + 'px';
+    guideBot.style.height = Math.max(0, window.innerHeight - y - 40) + 'px';
+  });
+
+  apply();
+})();
+</script>
