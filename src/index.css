@@ -1,1 +1,287 @@
-/* Default Vite styles removed to fix full-page layout conflicts with site.css */
+/* 
+  Sterlite Copper Premium Design System
+  Professional build with advanced motion and depth.
+  Colors and Text remain unchanged as per request.
+*/
+
+:root {
+  /* Premium Motion Tokens */
+  --ease-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --reveal-duration: 0.85s;
+  
+  /* Advanced Depth Tokens */
+  --shadow-subtle: 0 2px 10px rgba(0, 0, 0, 0.04);
+  --shadow-card: 0 10px 30px -10px rgba(0, 0, 0, 0.08), 0 4px 12px -4px rgba(0, 0, 0, 0.03);
+  --shadow-premium: 0 24px 60px -12px rgba(0, 0, 0, 0.12), 0 12px 24px -8px rgba(0, 0, 0, 0.06);
+  
+  /* Glassmorphism Refined */
+  --glass-nav: rgba(255, 255, 255, 0.82);
+  --glass-blur: 14px;
+}
+
+/* Base Polish */
+body {
+  letter-spacing: -0.01em;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+h1, h2, h3, .h-section {
+  letter-spacing: -0.02em;
+}
+
+/* Smooth Reveal Transitions (No Blur) */
+.reveal, 
+.reveal-scale, 
+.reveal-left, 
+.reveal-right {
+  opacity: 0;
+  will-change: transform, opacity;
+  transition: 
+    opacity var(--reveal-duration) var(--ease-expo),
+    transform var(--reveal-duration) var(--ease-expo) !important;
+}
+
+.reveal { transform: translateY(32px); }
+.reveal-scale { transform: scale(0.96); }
+.reveal-left { transform: translateX(-40px); }
+.reveal-right { transform: translateX(40px); }
+
+.reveal.in,
+.reveal-scale.in,
+.reveal-left.in,
+.reveal-right.in {
+  opacity: 1;
+  transform: none;
+}
+
+/* Premium Card & Element Interactions */
+.pillar-card, .news-card, .product-card, .social-card, .fin-tile, .cta-card {
+  transition: all 0.5s var(--ease-expo) !important;
+  box-shadow: var(--shadow-card) !important;
+  border: 1px solid var(--line) !important;
+}
+
+.pillar-card:hover, 
+.news-card:hover, 
+.product-card:hover, 
+.social-card:hover, 
+.fin-tile:hover,
+.cta-card:hover {
+  transform: translateY(-6px) scale(1.005) !important;
+  box-shadow: var(--shadow-premium) !important;
+  border-color: var(--green) !important;
+}
+
+/* Button & Link Refinements */
+.btn-primary, .apply-btn, .search-btn {
+  transition: all 0.35s var(--ease-expo) !important;
+}
+
+.btn-primary:hover, .apply-btn:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.05);
+}
+
+.nav-menu a {
+  transition: all 0.3s var(--ease-expo);
+  padding: 8px 12px;
+  border-radius: 8px;
+}
+
+.nav-menu a:hover {
+  background: var(--green-pale);
+  color: var(--green) !important;
+}
+
+.nav-menu a.active {
+  background: var(--green-pale);
+  color: var(--green) !important;
+  font-weight: 600;
+}
+
+/* Nav Polish */
+.nav {
+  background: var(--glass-nav) !important;
+  backdrop-filter: blur(var(--glass-blur)) !important;
+  -webkit-backdrop-filter: blur(var(--glass-blur)) !important;
+  transition: all 0.4s var(--ease-expo) !important;
+}
+
+.nav.scrolled {
+  padding-block: 4px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.05) !important;
+}
+
+/* Image & Media Polish */
+img {
+  transition: transform 1.2s var(--ease-expo);
+}
+
+.gallery img:hover, .pillar-card:hover .ph, .news-card:hover img {
+  transform: scale(1.04);
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg-2);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--line-2);
+  border-radius: 10px;
+  border: 2px solid var(--bg-2);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--muted-2);
+}
+
+/* Search Overlay Styles */
+.search-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding-top: 10vh;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.4s var(--ease-expo);
+}
+
+.search-overlay.active {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.search-overlay-bg {
+  position: absolute;
+  inset: 0;
+  background: rgba(10, 15, 20, 0.88);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.search-container {
+  position: relative;
+  width: min(90vw, 840px);
+  background: var(--bg);
+  border-radius: 24px;
+  box-shadow: var(--shadow-premium);
+  overflow: hidden;
+  transform: translateY(-20px);
+  transition: transform 0.5s var(--ease-expo);
+}
+
+.search-overlay.active .search-container {
+  transform: translateY(0);
+}
+
+.search-header {
+  display: flex;
+  align-items: center;
+  padding: 24px 32px;
+  border-bottom: 1px solid var(--line);
+  gap: 20px;
+}
+
+.search-input-wrap {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  color: var(--muted);
+}
+
+.search-icon {
+  flex: none;
+  color: var(--green);
+}
+
+.search-input-wrap input {
+  width: 100%;
+  border: none;
+  background: transparent;
+  font-size: 20px;
+  font-weight: 500;
+  color: var(--ink);
+  outline: none;
+}
+
+.search-close {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: none;
+  background: var(--bg-2);
+  color: var(--muted);
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  transition: all 0.2s var(--ease-expo);
+}
+
+.search-close:hover {
+  background: var(--line);
+  color: var(--ink);
+  transform: rotate(90deg);
+}
+
+.search-results-mock {
+  padding: 32px;
+  background: var(--bg-3);
+}
+
+.search-hint {
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--muted);
+  margin-bottom: 20px;
+}
+
+.quick-links {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+}
+
+.quick-links a {
+  display: flex;
+  align-items: center;
+  padding: 16px 20px;
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  font-weight: 600;
+  color: var(--ink-2);
+  transition: all 0.3s var(--ease-expo);
+}
+
+.quick-links a:hover {
+  border-color: var(--green);
+  color: var(--green);
+  transform: translateX(4px);
+  box-shadow: 0 8px 20px rgba(10, 10, 10, 0.04);
+}
+
+@media (max-width: 640px) {
+  .quick-links {
+    grid-template-columns: 1fr;
+  }
+  .search-container {
+    width: 95vw;
+    border-radius: 16px;
+  }
+  .search-header {
+    padding: 16px 20px;
+  }
+  .search-input-wrap input {
+    font-size: 17px;
+  }
+}

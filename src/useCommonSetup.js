@@ -5,29 +5,34 @@ export default function useCommonSetup() {
   const { pathname } = useLocation();
 
   useEffect(() => {
-    // 1. Scroll reveals
+    // 1. Scroll reveals with automated staggering
     const targets = document.querySelectorAll('[data-reveal], .reveal, .reveal-scale, .reveal-left, .reveal-right');
     const ioReveal = new IntersectionObserver((entries) => {
       entries.forEach(e => {
         if (e.isIntersecting) { 
           e.target.classList.add('in'); 
-        } else {
-          e.target.classList.remove('in');
-        }
+        } 
       });
-    }, { threshold: 0.05, rootMargin: '80px 0px -20px 0px' });
+    }, { 
+      threshold: 0.1, 
+      rootMargin: '0px 0px -5% 0px' 
+    });
     
     if (targets.length) {
-      const grids = document.querySelectorAll('.glance-mvv, .people-grid, .stat-grid, .fin-grid, .fin-reports, .esg-grid, .jobs-list, .news-grid, .pillars-row, .card-grid, .prose');
+      // Professional automated staggering for common grid structures
+      const gridSelectors = '.glance-mvv, .people-grid, .stat-grid, .fin-grid, .fin-reports, .esg-grid, .jobs-list, .news-grid, .pillars-row, .card-grid, .prose, .social-cards, .gallery';
+      const grids = document.querySelectorAll(gridSelectors);
+      
       grids.forEach(g => {
-        const children = g.querySelectorAll('.reveal');
-        children.forEach((c, i) => {
-          if (!c.className.includes('delay-')) {
-            const d = Math.min(i + 1, 8);
-            c.classList.add('delay-' + d);
+        const items = g.querySelectorAll('.reveal, .reveal-scale, .reveal-left, .reveal-right, .pillar-card, .news-card, .product-card, .social-card, .fin-tile');
+        items.forEach((item, i) => {
+          if (![...item.classList].some(cls => cls.startsWith('delay-'))) {
+            const delay = Math.min(i + 1, 12);
+            item.style.transitionDelay = `${delay * 0.08}s`;
           }
         });
       });
+      
       targets.forEach(t => ioReveal.observe(t));
     }
 
