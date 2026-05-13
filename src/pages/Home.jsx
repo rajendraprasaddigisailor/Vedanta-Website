@@ -138,7 +138,7 @@ export default function Home() {
 
   <div className="pillars-row reveal delay-3">
     <article className="pillar-card reveal">
-      <img className="ph" src="assets/pillar-company.png" alt="Company" />
+      <img className="ph" src="assets/contact_hero.png" alt="Company" />
       <div className="body">
         <h3>Our Company</h3>
         <p className="reveal">Sterlite Copper is a key part of Vedanta Limited's Copper operations globally.</p>
@@ -168,7 +168,7 @@ export default function Home() {
       </div>
     </article>
     <article className="pillar-card reveal">
-      <img className="ph" src="assets/pillar-people.png" alt="People" />
+      <img className="ph" src="assets/careers_hero.png" alt="People" />
       <div className="body">
         <h3>People & Careers</h3>
         <p className="reveal">We attribute much of our success to our talented workforce.</p>
@@ -376,7 +376,7 @@ export default function Home() {
           </figcaption>
         </figure>
         <figure className="csr-story">
-          <img src="assets/pillar-company.png" alt="Saplings planted under the Pasumai Thoothukudi green cover initiative" loading="lazy" />
+          <img src="assets/contact_hero.png" alt="Saplings planted under the Pasumai Thoothukudi green cover initiative" loading="lazy" />
           <figcaption>
             <span className="csr-label">Pasumai Thoothukudi</span>
             <strong>1 million trees</strong>

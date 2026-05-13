@@ -1,142 +1,22 @@
-/* 
-  Sterlite Copper Premium Design System
-  Professional build with advanced motion and depth.
-  Colors and Text remain unchanged as per request.
-*/
-
-:root {
-  /* Premium Motion Tokens */
-  --ease-expo: cubic-bezier(0.16, 1, 0.3, 1);
-  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
-  --reveal-duration: 0.85s;
-  
-  /* Advanced Depth Tokens */
-  --shadow-subtle: 0 2px 10px rgba(0, 0, 0, 0.04);
-  --shadow-card: 0 10px 30px -10px rgba(0, 0, 0, 0.08), 0 4px 12px -4px rgba(0, 0, 0, 0.03);
-  --shadow-premium: 0 24px 60px -12px rgba(0, 0, 0, 0.12), 0 12px 24px -8px rgba(0, 0, 0, 0.06);
-  
-  /* Glassmorphism Refined */
-  --glass-nav: rgba(255, 255, 255, 0.82);
-  --glass-blur: 14px;
+/* Lenis Smooth Scroll CSS */
+html.lenis, html.lenis body {
+  height: auto;
 }
 
-/* Base Polish */
-body {
-  letter-spacing: -0.01em;
-  -webkit-font-smoothing: antialiased;
-  text-rendering: optimizeLegibility;
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
 }
 
-h1, h2, h3, .h-section {
-  letter-spacing: -0.02em;
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
 }
 
-/* Smooth Reveal Transitions (No Blur) */
-.reveal, 
-.reveal-scale, 
-.reveal-left, 
-.reveal-right {
-  opacity: 0;
-  will-change: transform, opacity;
-  transition: 
-    opacity var(--reveal-duration) var(--ease-expo),
-    transform var(--reveal-duration) var(--ease-expo) !important;
+.lenis.lenis-stopped {
+  overflow: hidden;
 }
 
-.reveal { transform: translateY(32px); }
-.reveal-scale { transform: scale(0.96); }
-.reveal-left { transform: translateX(-40px); }
-.reveal-right { transform: translateX(40px); }
-
-.reveal.in,
-.reveal-scale.in,
-.reveal-left.in,
-.reveal-right.in {
-  opacity: 1;
-  transform: none;
-}
-
-/* Premium Card & Element Interactions */
-.pillar-card, .news-card, .product-card, .social-card, .fin-tile, .cta-card {
-  transition: all 0.5s var(--ease-expo) !important;
-  box-shadow: var(--shadow-card) !important;
-  border: 1px solid var(--line) !important;
-}
-
-.pillar-card:hover, 
-.news-card:hover, 
-.product-card:hover, 
-.social-card:hover, 
-.fin-tile:hover,
-.cta-card:hover {
-  transform: translateY(-6px) scale(1.005) !important;
-  box-shadow: var(--shadow-premium) !important;
-  border-color: var(--green) !important;
-}
-
-/* Button & Link Refinements */
-.btn-primary, .apply-btn, .search-btn {
-  transition: all 0.35s var(--ease-expo) !important;
-}
-
-.btn-primary:hover, .apply-btn:hover {
-  transform: translateY(-2px);
-  filter: brightness(1.05);
-}
-
-.nav-menu a {
-  transition: all 0.3s var(--ease-expo);
-  padding: 8px 12px;
-  border-radius: 8px;
-}
-
-.nav-menu a:hover {
-  background: var(--green-pale);
-  color: var(--green) !important;
-}
-
-.nav-menu a.active {
-  background: var(--green-pale);
-  color: var(--green) !important;
-  font-weight: 600;
-}
-
-/* Nav Polish */
-.nav {
-  background: var(--glass-nav) !important;
-  backdrop-filter: blur(var(--glass-blur)) !important;
-  -webkit-backdrop-filter: blur(var(--glass-blur)) !important;
-  transition: all 0.4s var(--ease-expo) !important;
-}
-
-.nav.scrolled {
-  padding-block: 4px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.05) !important;
-}
-
-/* Image & Media Polish */
-img {
-  transition: transform 1.2s var(--ease-expo);
-}
-
-.gallery img:hover, .pillar-card:hover .ph, .news-card:hover img {
-  transform: scale(1.04);
-}
-
-/* Custom Scrollbar */
-::-webkit-scrollbar {
-  width: 10px;
-}
-::-webkit-scrollbar-track {
-  background: var(--bg-2);
-}
-::-webkit-scrollbar-thumb {
-  background: var(--line-2);
-  border-radius: 10px;
-  border: 2px solid var(--bg-2);
-}
-::-webkit-scrollbar-thumb:hover {
-  background: var(--muted-2);
+.lenis.lenis-scrolling iframe {
+  pointer-events: none;
 }
 
 /* Search Overlay Styles */
@@ -150,7 +30,7 @@ img {
   padding-top: 10vh;
   opacity: 0;
   pointer-events: none;
-  transition: opacity 0.4s var(--ease-expo);
+  transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .search-overlay.active {
@@ -161,7 +41,7 @@ img {
 .search-overlay-bg {
   position: absolute;
   inset: 0;
-  background: rgba(10, 15, 20, 0.88);
+  background: rgba(10, 15, 20, 0.85);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
 }
@@ -171,10 +51,10 @@ img {
   width: min(90vw, 840px);
   background: var(--bg);
   border-radius: 24px;
-  box-shadow: var(--shadow-premium);
+  box-shadow: 0 40px 100px rgba(0, 0, 0, 0.4);
   overflow: hidden;
   transform: translateY(-20px);
-  transition: transform 0.5s var(--ease-expo);
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .search-overlay.active .search-container {
@@ -222,7 +102,7 @@ img {
   display: grid;
   place-items: center;
   cursor: pointer;
-  transition: all 0.2s var(--ease-expo);
+  transition: all 0.2s ease;
 }
 
 .search-close:hover {
@@ -260,7 +140,7 @@ img {
   border-radius: 12px;
   font-weight: 600;
   color: var(--ink-2);
-  transition: all 0.3s var(--ease-expo);
+  transition: all 0.3s ease;
 }
 
 .quick-links a:hover {

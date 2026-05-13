@@ -9,7 +9,7 @@ export default function Contact() {
         <div className="hero-wrap">
           <div className="hero" role="region" aria-label="Contact">
             <div className="hero-track">
-              <div className="hero-slide active" style={{ "backgroundImage": "linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.65)), url('assets/pillar-company.png')" }}>
+              <div className="hero-slide active" style={{ "backgroundImage": "linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.65)), url('assets/contact_hero.png')" }}>
                 <div className="hero-kicker">Contact</div>
                 <h1 className="hero-title">Let's build<br />together</h1>
                 <p className="hero-sub reveal delay-2">Procurement, partnerships, community initiatives or press — we respond within two working days.</p>

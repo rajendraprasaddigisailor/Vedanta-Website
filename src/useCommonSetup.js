@@ -1,38 +1,54 @@
 import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
+import Lenis from 'lenis';
 
 export default function useCommonSetup() {
   const { pathname } = useLocation();
 
   useEffect(() => {
-    // 1. Scroll reveals with automated staggering
+    // Initialize Lenis smooth scroll
+    const lenis = new Lenis({
+      duration: 1.2,
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      orientation: 'vertical',
+      gestureOrientation: 'vertical',
+      smoothWheel: true,
+      wheelMultiplier: 1,
+      smoothTouch: false,
+      touchMultiplier: 2,
+      infinite: false,
+    });
+
+    function raf(time) {
+      lenis.raf(time);
+      requestAnimationFrame(raf);
+    }
+
+    requestAnimationFrame(raf);
+
+    // 1. Scroll reveals
     const targets = document.querySelectorAll('[data-reveal], .reveal, .reveal-scale, .reveal-left, .reveal-right');
     const ioReveal = new IntersectionObserver((entries) => {
       entries.forEach(e => {
         if (e.isIntersecting) { 
           e.target.classList.add('in'); 
-        } 
+        } else {
+          e.target.classList.remove('in');
+        }
       });
-    }, { 
-      threshold: 0.1, 
-      rootMargin: '0px 0px -5% 0px' 
-    });
+    }, { threshold: 0.05, rootMargin: '80px 0px -20px 0px' });
     
     if (targets.length) {
-      // Professional automated staggering for common grid structures
-      const gridSelectors = '.glance-mvv, .people-grid, .stat-grid, .fin-grid, .fin-reports, .esg-grid, .jobs-list, .news-grid, .pillars-row, .card-grid, .prose, .social-cards, .gallery';
-      const grids = document.querySelectorAll(gridSelectors);
-      
+      const grids = document.querySelectorAll('.glance-mvv, .people-grid, .stat-grid, .fin-grid, .fin-reports, .esg-grid, .jobs-list, .news-grid, .pillars-row, .card-grid, .prose');
       grids.forEach(g => {
-        const items = g.querySelectorAll('.reveal, .reveal-scale, .reveal-left, .reveal-right, .pillar-card, .news-card, .product-card, .social-card, .fin-tile');
-        items.forEach((item, i) => {
-          if (![...item.classList].some(cls => cls.startsWith('delay-'))) {
-            const delay = Math.min(i + 1, 12);
-            item.style.transitionDelay = `${delay * 0.08}s`;
+        const children = g.querySelectorAll('.reveal');
+        children.forEach((c, i) => {
+          if (!c.className.includes('delay-')) {
+            const d = Math.min(i + 1, 8);
+            c.classList.add('delay-' + d);
           }
         });
       });
-      
       targets.forEach(t => ioReveal.observe(t));
     }
 

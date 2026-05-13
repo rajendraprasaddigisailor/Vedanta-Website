@@ -51,8 +51,8 @@ export default function About() {
   <div className="ps-inner">
     <div className="section-head"><div className="eyebrow reveal">Leadership</div><h2 className="reveal delay-1">The team steering Sterlite Copper forward</h2></div>
     <div className="people-grid reveal delay-3">
-      <div className="person reveal"><div className="person-photo" style={{"backgroundImage":"url('assets/pillar-people.png')"}}></div><h3>Pankaj Kumar</h3><div className="role">Chief Executive Officer</div><p className="reveal">Metallurgy veteran with 25+ years across Vedanta's base-metals portfolio.</p></div>
-      <div className="person reveal"><div className="person-photo" style={{"backgroundImage":"url('assets/pillar-company.png')"}}></div><h3>S. Ramnath</h3><div className="role">Chief Financial Officer</div><p className="reveal">Leads finance, investor relations and capital allocation.</p></div>
+      <div className="person reveal"><div className="person-photo" style={{"backgroundImage":"url('assets/careers_hero.png')"}}></div><h3>Pankaj Kumar</h3><div className="role">Chief Executive Officer</div><p className="reveal">Metallurgy veteran with 25+ years across Vedanta's base-metals portfolio.</p></div>
+      <div className="person reveal"><div className="person-photo" style={{"backgroundImage":"url('assets/contact_hero.png')"}}></div><h3>S. Ramnath</h3><div className="role">Chief Financial Officer</div><p className="reveal">Leads finance, investor relations and capital allocation.</p></div>
       <div className="person reveal"><div className="person-photo" style={{"backgroundImage":"url('assets/pillar-operations.png')"}}></div><h3>Dr. Meera Iyer</h3><div className="role">Head of Sustainability</div><p className="reveal">Drives ESG agenda, water neutrality and community programmes.</p></div>
       <div className="person reveal"><div className="person-photo" style={{"backgroundImage":"url('assets/pillar-policies.png')"}}></div><h3>Arun Narayan</h3><div className="role">Head of Operations</div><p className="reveal">Oversees smelter, refinery and rod-plant operations end-to-end.</p></div>
     </div>
