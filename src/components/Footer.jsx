@@ -7,7 +7,7 @@ export default function Footer() {
 
     {/*  Manifesto + CTA  */}
     <div className="foot-manifesto">
-      <h2 className="reveal delay-1" className="reveal delay-1">Copper is the <em>quiet infrastructure</em> of a country moving forward.</h2>
+      <h2 className="reveal delay-1">Copper is the <em>quiet infrastructure</em> of a country moving forward.</h2>
       <div className="cta-card reveal delay-2">
         <div className="eyebrow">Let's build together</div>
         <p className="reveal">Procurement, partnerships, community initiatives or press — we respond within two working days.</p>
