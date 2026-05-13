@@ -5,37 +5,29 @@ export default function useCommonSetup() {
   const { pathname } = useLocation();
 
   useEffect(() => {
-    // 1. Scroll reveals with advanced staggering
+    // 1. Scroll reveals
     const targets = document.querySelectorAll('[data-reveal], .reveal, .reveal-scale, .reveal-left, .reveal-right');
     const ioReveal = new IntersectionObserver((entries) => {
       entries.forEach(e => {
         if (e.isIntersecting) { 
           e.target.classList.add('in'); 
-        } 
+        } else {
+          e.target.classList.remove('in');
+        }
       });
-    }, { 
-      threshold: 0.1, 
-      rootMargin: '0px 0px -10% 0px' 
-    });
+    }, { threshold: 0.05, rootMargin: '80px 0px -20px 0px' });
     
     if (targets.length) {
-      // Auto-stagger children in common grid layouts
-      const gridSelectors = '.glance-mvv, .people-grid, .stat-grid, .fin-grid, .fin-reports, .esg-grid, .jobs-list, .news-grid, .pillars-row, .card-grid, .prose, .social-cards, .gallery';
-      const grids = document.querySelectorAll(gridSelectors);
-      
+      const grids = document.querySelectorAll('.glance-mvv, .people-grid, .stat-grid, .fin-grid, .fin-reports, .esg-grid, .jobs-list, .news-grid, .pillars-row, .card-grid, .prose');
       grids.forEach(g => {
-        const children = g.querySelectorAll('.reveal, .reveal-scale, .reveal-left, .reveal-right, .pillar-card, .news-card, .product-card, .social-card');
+        const children = g.querySelectorAll('.reveal');
         children.forEach((c, i) => {
-          if (!c.classList.contains('reveal') && !c.classList.contains('reveal-scale') && !c.classList.contains('reveal-left') && !c.classList.contains('reveal-right')) {
-            c.classList.add('reveal');
-          }
-          if (![...c.classList].some(cls => cls.startsWith('delay-'))) {
-            const delay = Math.min(i + 1, 10);
-            c.style.transitionDelay = `${delay * 0.1}s`;
+          if (!c.className.includes('delay-')) {
+            const d = Math.min(i + 1, 8);
+            c.classList.add('delay-' + d);
           }
         });
       });
-      
       targets.forEach(t => ioReveal.observe(t));
     }
 
