@@ -47,7 +47,7 @@ export default function Careers() {
 <section className="cta-band">
   <div className="cta-inner">
     <div><div className="eyebrow reveal">Don't see your role?</div><h2 className="reveal delay-1">Share your CV — we'll reach out when something fits.</h2></div>
-    <div className="cta-btns"><a href="mailto:careers@sterlitecopper.com" className="btn-primary">Email the talent team →</a><a href="about.html" className="btn-primary btn-sm">About Sterlite</a></div>
+    <div className="cta-btns"><a href="mailto:careers@sterlitecopper.com" className="btn-primary"><span className="roll-text"><span data-text="Email the talent team →">Email the talent team →</span></span></a><a href="about.html" className="btn-primary btn-sm"><span className="roll-text"><span data-text="About Sterlite">About Sterlite</span></span></a></div>
   </div>
 </section>
 

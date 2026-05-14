@@ -58,7 +58,7 @@ export default function Investors() {
 <section className="cta-band">
   <div className="cta-inner">
     <div><div className="eyebrow reveal">Contact IR</div><h2 className="reveal delay-1">Questions? Our investor relations team is here to help.</h2></div>
-    <div className="cta-btns"><a href="mailto:ir@sterlitecopper.com" className="btn-primary">Email IR →</a><a href="contact.html" className="btn-primary btn-sm">General contact</a></div>
+    <div className="cta-btns"><a href="mailto:ir@sterlitecopper.com" className="btn-primary"><span className="roll-text"><span data-text="Email IR →">Email IR →</span></span></a><a href="contact.html" className="btn-primary btn-sm"><span className="roll-text"><span data-text="General contact">General contact</span></span></a></div>
   </div>
 </section>
 

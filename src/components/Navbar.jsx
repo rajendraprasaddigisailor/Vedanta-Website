@@ -46,13 +46,16 @@ export default function Navbar() {
               aria-label="Search"
               onClick={() => setIsSearchOpen(true)}
             >
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
             </button>
-            <Link className="apply-btn" to="/buy">Buy now
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+            <Link className="apply-btn" to="/buy">
+              <span className="roll-text">
+                <span data-text="Buy now">Buy now</span>
+              </span>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
             </Link>
             <button className="menu-toggle" aria-label="Menu">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
             </button>
           </div>
         </div>
@@ -64,7 +67,7 @@ export default function Navbar() {
         <div className="search-container">
           <div className="search-header">
             <div className="search-input-wrap">
-              <svg className="search-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
+              <svg className="search-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
               <input 
                 type="text" 
                 placeholder="Search products, reports, news..." 
@@ -73,17 +76,17 @@ export default function Navbar() {
               />
             </div>
             <button className="search-close" onClick={() => setIsSearchOpen(false)} aria-label="Close search">
-              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18M6 6l12 12"/></svg>
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M18 6 6 18M6 6l12 12"/></svg>
             </button>
           </div>
           
           <div className="search-results-mock">
             <div className="search-hint">Quick Links</div>
             <div className="quick-links">
-              <Link to="/buy" onClick={() => setIsSearchOpen(false)}>Procurement Portal</Link>
-              <Link to="/investors" onClick={() => setIsSearchOpen(false)}>FY24 Annual Report</Link>
-              <Link to="/sustainability" onClick={() => setIsSearchOpen(false)}>ESG Dashboard</Link>
-              <Link to="/careers" onClick={() => setIsSearchOpen(false)}>Current Openings</Link>
+              <Link to="/buy" onClick={() => setIsSearchOpen(false)}><span className="roll-text"><span data-text="Procurement Portal">Procurement Portal</span></span></Link>
+              <Link to="/investors" onClick={() => setIsSearchOpen(false)}><span className="roll-text"><span data-text="FY24 Annual Report">FY24 Annual Report</span></span></Link>
+              <Link to="/sustainability" onClick={() => setIsSearchOpen(false)}><span className="roll-text"><span data-text="ESG Dashboard">ESG Dashboard</span></span></Link>
+              <Link to="/careers" onClick={() => setIsSearchOpen(false)}><span className="roll-text"><span data-text="Current Openings">Current Openings</span></span></Link>
             </div>
           </div>
         </div>

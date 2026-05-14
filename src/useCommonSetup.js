@@ -19,12 +19,14 @@ export default function useCommonSetup() {
       infinite: false,
     });
 
+    let rafId;
+
     function raf(time) {
       lenis.raf(time);
-      requestAnimationFrame(raf);
+      rafId = requestAnimationFrame(raf);
     }
 
-    requestAnimationFrame(raf);
+    rafId = requestAnimationFrame(raf);
 
     // 1. Scroll reveals
     const targets = document.querySelectorAll('[data-reveal], .reveal, .reveal-scale, .reveal-left, .reveal-right');
@@ -86,11 +88,18 @@ export default function useCommonSetup() {
     // 4. Hero slider (only runs if hero is on page)
     setupHeroSlider();
 
+    // 5. Timeline horizontal scroll
+    setupTimelineScroll();
+
     return () => {
       ioReveal.disconnect();
       ioCount.disconnect();
       ioBars.disconnect();
       if (window.heroTimer) clearInterval(window.heroTimer);
+      if (window._tlScrollHandler) window.removeEventListener('scroll', window._tlScrollHandler);
+      
+      cancelAnimationFrame(rafId);
+      lenis.destroy();
     };
   }, [pathname]);
 
@@ -99,7 +108,37 @@ export default function useCommonSetup() {
     setupNav();
     setupA11y();
     setupEditMode();
+    
+    // Ensure timeline scroll is recalculated on resize
+    window.addEventListener('resize', setupTimelineScroll);
+    return () => window.removeEventListener('resize', setupTimelineScroll);
   }, []);
+}
+
+function setupTimelineScroll() {
+  const section = document.querySelector('.timeline-pinned');
+  const track = document.querySelector('.timeline-track');
+  const rail = document.querySelector('.timeline-rail');
+  const progress = document.querySelector('.timeline-progress span');
+
+  if (!section || !track || !rail) return;
+
+  const extra = Math.max(0, track.scrollWidth - rail.clientWidth);
+  section.style.setProperty('--tl-extra', `${extra}px`);
+
+  const onScroll = () => {
+    const rect = section.getBoundingClientRect();
+    let p = -rect.top / extra;
+    p = Math.max(0, Math.min(1, p));
+    track.style.transform = `translate3d(${-p * extra}px, 0, 0)`;
+    if (progress) progress.style.width = `${p * 100}%`;
+  };
+
+  // Remove old listener if exists
+  if (window._tlScrollHandler) window.removeEventListener('scroll', window._tlScrollHandler);
+  window._tlScrollHandler = onScroll;
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
 }
 
 function animateCount(el) {

@@ -38,10 +38,10 @@ export default function Home() {
     </div>
     <div className="hero-arrows">
       <button id="hero-prev" aria-label="Previous slide">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg>
       </button>
       <button id="hero-next" aria-label="Next slide">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg>
       </button>
     </div>
     <div className="hero-dots" id="hero-dots" role="tablist">
@@ -69,37 +69,38 @@ export default function Home() {
     <div className="glance-mvv reveal delay-3">
       <div className="mvv-item reveal">
         <div className="mvv-icon">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>
         </div>
         <div className="mvv-label">Mission</div>
       </div>
       <div className="mvv-item reveal">
         <div className="mvv-icon">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="3"/></svg>
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="3"/></svg>
         </div>
         <div className="mvv-label">Vision</div>
       </div>
       <div className="mvv-item reveal">
         <div className="mvv-icon">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 3h12l4 6-10 13L2 9l4-6z"/><path d="M11 3 8 9l4 13 4-13-3-6"/><path d="M2 9h20"/></svg>
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M6 3h12l4 6-10 13L2 9l4-6z"/><path d="M11 3 8 9l4 13 4-13-3-6"/><path d="M2 9h20"/></svg>
         </div>
         <div className="mvv-label">Values</div>
       </div>
     </div>
 
-    <button className="btn-primary reveal delay-4">Facts about Copper
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+    <button className="btn-primary reveal delay-4">
+      <span className="roll-text"><span data-text="Facts about Copper">Facts about Copper</span></span>
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
     </button>
   </div>
 
   <div className="gallery reveal delay-3">
     <div className="col">
-      <img src="assets/gallery1.png" alt="Copper coils" />
-      <img src="assets/gallery2.png" alt="Operations team" />
+      <div className="scroll-zoom"><img src="assets/gallery1.png" alt="Copper coils" /></div>
+      <div className="scroll-zoom"><img src="assets/gallery2.png" alt="Operations team" /></div>
     </div>
     <div className="col offset">
-      <img src="assets/pillar-operations.jpg" alt="Molten copper" />
-      <img src="assets/copper_wire_bundles.png" alt="Copper wire" />
+      <div className="scroll-zoom"><img src="assets/pillar-operations.jpg" alt="Molten copper" /></div>
+      <div className="scroll-zoom"><img src="assets/copper_wire_bundles.png" alt="Copper wire" /></div>
     </div>
   </div>
 </section>
@@ -137,43 +138,43 @@ export default function Home() {
   </div>
 
   <div className="pillars-row reveal delay-3">
-    <article className="pillar-card reveal">
+    <article className="pillar-card reveal scroll-zoom">
       <img className="ph" src="assets/contact_hero.png" alt="Company" />
       <div className="body">
         <h3>Our Company</h3>
         <p className="reveal">Sterlite Copper is a key part of Vedanta Limited's Copper operations globally.</p>
-        <a className="link-green" href="#">View all details
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+        <a className="link-green" href="#"><span className="roll-text"><span data-text="View all details">View all details</span></span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
         </a>
       </div>
     </article>
-    <article className="pillar-card reveal">
+    <article className="pillar-card reveal scroll-zoom">
       <img className="ph" src="assets/pillar-operations.png" alt="Operations" />
       <div className="body">
         <h3>Our Operations</h3>
         <p className="reveal">From smelting and refining to acid production, we execute every step with precision, safety and reliability.</p>
-        <a className="link-green" href="#">View all details
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+        <a className="link-green" href="#"><span className="roll-text"><span data-text="View all details">View all details</span></span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
         </a>
       </div>
     </article>
-    <article className="pillar-card reveal">
+    <article className="pillar-card reveal scroll-zoom">
       <img className="ph" src="assets/pillar-policies.png" alt="Policies" />
       <div className="body">
         <h3>Our Policies</h3>
         <p className="reveal">An adherent set of rigorous committed standards across all material aspects of our business.</p>
-        <a className="link-green" href="#">View all details
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+        <a className="link-green" href="#"><span className="roll-text"><span data-text="View all details">View all details</span></span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
         </a>
       </div>
     </article>
-    <article className="pillar-card reveal">
+    <article className="pillar-card reveal scroll-zoom">
       <img className="ph" src="assets/careers_hero.png" alt="People" />
       <div className="body">
         <h3>People & Careers</h3>
         <p className="reveal">We attribute much of our success to our talented workforce.</p>
-        <a className="link-green" href="#">View all details
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+        <a className="link-green" href="#"><span className="roll-text"><span data-text="View all details">View all details</span></span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
         </a>
       </div>
     </article>
@@ -222,8 +223,12 @@ export default function Home() {
         <div>Registered<strong>LME &amp; COMEX</strong></div>
       </div>
       <div className="actions">
-        <button className="btn-buy reveal delay-4">Buy now →</button>
-        <button className="btn-ds"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v14m0 0l-5-5m5 5l5-5M5 21h14"/></svg>Datasheet</button>
+        <button className="btn-buy reveal delay-4">
+          <span className="roll-text">
+            <span data-text="Buy now →">Buy now →</span>
+          </span>
+        </button>
+        <button className="btn-ds"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M12 3v14m0 0l-5-5m5 5l5-5M5 21h14"/></svg><span className="roll-text"><span data-text="Datasheet">Datasheet</span></span></button>
       </div>
     </div>
     <div className="product-card rod">
@@ -236,8 +241,12 @@ export default function Home() {
         <div>Capacity<strong>216,000 MTPA</strong></div>
       </div>
       <div className="actions">
-        <button className="btn-buy reveal delay-4">Buy now →</button>
-        <button className="btn-ds"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v14m0 0l-5-5m5 5l5-5M5 21h14"/></svg>Datasheet</button>
+        <button className="btn-buy reveal delay-4">
+          <span className="roll-text">
+            <span data-text="Buy now →">Buy now →</span>
+          </span>
+        </button>
+        <button className="btn-ds"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M12 3v14m0 0l-5-5m5 5l5-5M5 21h14"/></svg><span className="roll-text"><span data-text="Datasheet">Datasheet</span></span></button>
       </div>
     </div>
     <div className="product-card acid">
@@ -250,8 +259,8 @@ export default function Home() {
         <div>Capacity<strong>1.2 M MTPA</strong></div>
       </div>
       <div className="actions">
-        <button className="btn-buy reveal delay-4">Enquire →</button>
-        <button className="btn-ds"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v14m0 0l-5-5m5 5l5-5M5 21h14"/></svg>MSDS</button>
+        <button className="btn-buy reveal delay-4"><span className="roll-text"><span data-text="Enquire →">Enquire →</span></span></button>
+        <button className="btn-ds"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M12 3v14m0 0l-5-5m5 5l5-5M5 21h14"/></svg>MSDS</button>
       </div>
     </div>
     <div className="product-card phos">
@@ -264,8 +273,8 @@ export default function Home() {
         <div>Capacity<strong>220,000 MTPA</strong></div>
       </div>
       <div className="actions">
-        <button className="btn-buy reveal delay-4">Enquire →</button>
-        <button className="btn-ds"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v14m0 0l-5-5m5 5l5-5M5 21h14"/></svg>MSDS</button>
+        <button className="btn-buy reveal delay-4"><span className="roll-text"><span data-text="Enquire →">Enquire →</span></span></button>
+        <button className="btn-ds"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M12 3v14m0 0l-5-5m5 5l5-5M5 21h14"/></svg>MSDS</button>
       </div>
     </div>
     <div className="product-card slag">
@@ -278,8 +287,8 @@ export default function Home() {
         <div>Utilisation<strong>~100% diverted</strong></div>
       </div>
       <div className="actions">
-        <button className="btn-buy reveal delay-4">Enquire →</button>
-        <button className="btn-ds"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v14m0 0l-5-5m5 5l5-5M5 21h14"/></svg>Datasheet</button>
+        <button className="btn-buy reveal delay-4"><span className="roll-text"><span data-text="Enquire →">Enquire →</span></span></button>
+        <button className="btn-ds"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M12 3v14m0 0l-5-5m5 5l5-5M5 21h14"/></svg><span className="roll-text"><span data-text="Datasheet">Datasheet</span></span></button>
       </div>
     </div>
     <div className="product-card" style={{"background":"linear-gradient(135deg,var(--green-pale),var(--bg))","borderStyle":"dashed"}}>
@@ -292,7 +301,7 @@ export default function Home() {
         <div>Logistics<strong>Rail &amp; road</strong></div>
       </div>
       <div className="actions">
-        <button className="btn-buy reveal delay-4">Contact sales →</button>
+        <button className="btn-buy reveal delay-4"><span className="roll-text"><span data-text="Contact sales →">Contact sales →</span></span></button>
       </div>
     </div>
   </div>
@@ -341,8 +350,9 @@ export default function Home() {
       <h2 className="reveal delay-1 h-section" style={{"color":"#fff"}}>Corporate Social Responsibility</h2>
       <p className="lede reveal delay-2">Sterlite Copper has woven social responsibility into its business fabric right from its inception in 1996–1997.</p>
       <p className="reveal">The company believes that business objectives should include overall development of communities around its surrounding areas. The aim has always been to go beyond mere 'Corporate Social Responsibility' to understand the real needs and genuine concerns of the people — and provide the necessary stimulus to not only address these issues but ensure social involvement, acceptability and sustainability.</p>
-      <button className="btn-primary reveal delay-4">Read More
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+      <button className="btn-primary reveal delay-4">
+        <span className="roll-text"><span data-text="Read More">Read More</span></span>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
       </button>
     </div>
     <div className="csr-right reveal delay-3">
@@ -400,22 +410,23 @@ export default function Home() {
         <h3>Our Assurance</h3>
         <ul>
           <li><span className="dot">
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5"><path d="M20 6 9 17l-5-5"/></svg>
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3.5"><path d="M20 6 9 17l-5-5"/></svg>
           </span>Sustainable Copper Production since 1997</li>
           <li><span className="dot">
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5"><path d="M20 6 9 17l-5-5"/></svg>
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3.5"><path d="M20 6 9 17l-5-5"/></svg>
           </span>Over Two Decades of Operational Excellence</li>
           <li><span className="dot">
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5"><path d="M20 6 9 17l-5-5"/></svg>
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3.5"><path d="M20 6 9 17l-5-5"/></svg>
           </span>Meeting 36% of India's Copper Needs</li>
           <li><span className="dot">
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5"><path d="M20 6 9 17l-5-5"/></svg>
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3.5"><path d="M20 6 9 17l-5-5"/></svg>
           </span>Winner of coveted British Safety Council's Sword of Honour Award</li>
         </ul>
       </div>
 
-      <button className="btn-primary reveal delay-4">Read More
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+      <button className="btn-primary reveal delay-4">
+        <span className="roll-text"><span data-text="Read More">Read More</span></span>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
       </button>
     </div>
 
@@ -444,14 +455,15 @@ export default function Home() {
     <div className="social-left">
       <span className="sub reveal delay-1">Stay connected</span>
       <h2 className="reveal delay-2">Social Media Updates</h2>
-      <button className="btn-primary reveal delay-3">Follow us
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+      <button className="btn-primary reveal delay-3">
+        <span className="roll-text"><span data-text="Follow us">Follow us</span></span>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
       </button>
     </div>
     <div className="social-cards reveal delay-4">
       <div className="social-card reveal">
         <div className="plat"><span className="plat-icon">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><circle cx="17.5" cy="6.5" r="0.5" fill="currentColor"/></svg>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><circle cx="17.5" cy="6.5" r="0.5" fill="currentColor"/></svg>
         </span>Instagram</div>
         <p className="reveal txt"  >New video: Behind the scenes at our Thoothukudi smelter 🔥</p>
         <div className="meta"><span>❤ 2.4k</span><span>💬 86</span></div>
@@ -525,22 +537,22 @@ export default function Home() {
       <a className="fin-report reveal" href="#">
         <span className="year">FY24</span>
         <span className="t">Annual Report</span>
-        <span className="size"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M16 13H8M16 17H8M10 9H8"/></svg> PDF · 8.4 MB</span>
+        <span className="size"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M16 13H8M16 17H8M10 9H8"/></svg> PDF · 8.4 MB</span>
       </a>
       <a className="fin-report reveal" href="#">
         <span className="year">Q4</span>
         <span className="t">Earnings Presentation</span>
-        <span className="size"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg> PDF · 3.1 MB</span>
+        <span className="size"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg> PDF · 3.1 MB</span>
       </a>
       <a className="fin-report reveal" href="#">
         <span className="year">FY24</span>
         <span className="t">Sustainability Report</span>
-        <span className="size"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg> PDF · 12.1 MB</span>
+        <span className="size"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg> PDF · 12.1 MB</span>
       </a>
       <a className="fin-report reveal" href="#">
         <span className="year">Q4</span>
         <span className="t">Investor Call Transcript</span>
-        <span className="size"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg> PDF · 0.8 MB</span>
+        <span className="size"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg> PDF · 0.8 MB</span>
       </a>
     </div>
   </div>
@@ -553,8 +565,8 @@ export default function Home() {
       <div className="eyebrow reveal">Latest</div>
     <h2 className="h-section reveal delay-1">News & Media</h2>
     </div>
-    <a className="link-green" href="#">View all news
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+    <a className="link-green" href="#"><span className="roll-text"><span data-text="View all news">View all news</span></span>
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
     </a>
   </div>
   <div className="news-grid reveal delay-3">
@@ -562,28 +574,28 @@ export default function Home() {
       <div className="tag">Featured</div>
       <h3>Sterlite Copper awarded British Safety Council's Sword of Honour — 2024</h3>
     </div>
-    <article className="news-card reveal">
+    <article className="news-card reveal scroll-zoom">
       <img src="assets/pillar-operations.png" alt="" />
       <div className="b">
         <span className="date">Aug 12 2024 · Press</span>
         <h3>Q1 FY25: Record refined copper output at Silvassa Rod Plant</h3>
-        <a className="link" href="#">Read more <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
+        <a className="link" href="#">Read more <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
       </div>
     </article>
-    <article className="news-card reveal">
+    <article className="news-card reveal scroll-zoom">
       <img src="assets/gallery3.png" alt="" />
       <div className="b">
         <span className="date">Jul 28 2024 · CSR</span>
         <h3>Tamira Surabhi crosses 1 million women beneficiaries milestone</h3>
-        <a className="link" href="#">Read more <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
+        <a className="link" href="#">Read more <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
       </div>
     </article>
-    <article className="news-card reveal">
+    <article className="news-card reveal scroll-zoom">
       <img src="assets/gallery4.png" alt="" />
       <div className="b">
         <span className="date">Jun 14 2024 · Sustainability</span>
         <h3>Sterlite commits to 50% reduction in scope 1 & 2 emissions by 2030</h3>
-        <a className="link" href="#">Read more <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
+        <a className="link" href="#">Read more <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
       </div>
     </article>
   </div>

@@ -42,7 +42,7 @@ export default function Contact() {
                   </select>
                 </label>
                 <label className="reveal delay-7">Message<textarea rows="5" required placeholder="Brief details so we can route you to the right person"></textarea></label>
-                <div className="form-actions reveal delay-8"><button type="submit" className="btn-primary">Send message →</button><span className="form-sent" hidden>✓ Thanks — we'll be in touch within 2 business days.</span></div>
+                <div className="form-actions reveal delay-8"><button type="submit" className="btn-primary"><span className="roll-text"><span data-text="Send message →">Send message →</span></span></button><span className="form-sent" hidden>✓ Thanks — we'll be in touch within 2 business days.</span></div>
               </form>
               <aside className="contact-side">
                 <div className="contact-card reveal delay-1"><div className="cc-label">Corporate office</div><div className="cc-text"><strong>Sterlite Copper</strong><br />SIPCOT Industrial Complex,<br />Madurai Bypass Road, Thoothukudi<br />Tamil Nadu 628002, India</div></div>

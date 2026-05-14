@@ -37,8 +37,8 @@ export default function Buy() {
   <div className="ps-inner">
     <div className="section-head"><div className="eyebrow reveal">What you can order</div><h2 className="reveal delay-1">Two flagship products</h2></div>
     <div className="products-grid reveal delay-3">
-      <div className="product-card"><div className="swatch-cu"></div><div className="spec">LME Grade A</div><h3>Copper Cathodes</h3><p className="reveal">99.99% Cu, 125&nbsp;kg sheets bundled to ~2&nbsp;t bundles. Registered on LME &amp; COMEX. Minimum order 25&nbsp;MT.</p><div className="product-meta"><div>Purity<strong>99.99% Cu</strong></div><div>Bundle<strong>~2 MT</strong></div><div>Lead time<strong>2–3 wks</strong></div><div>MOQ<strong>25 MT</strong></div></div><div className="actions"><a className="btn-buy reveal delay-4" href="#quote">Request a quote →</a></div></div>
-      <div className="product-card rod"><div className="swatch-cu"></div><div className="spec">8 mm CCR</div><h3>Continuous Cast Rods</h3><p className="reveal">Oxygen-free 8&nbsp;mm copper rod, 3.5-ton coils. Zero-defect feed ready for wire-drawing. Minimum order 20&nbsp;MT.</p><div className="product-meta"><div>Diameter<strong>8 mm</strong></div><div>Coil<strong>3.5 MT</strong></div><div>Lead time<strong>2 wks</strong></div><div>MOQ<strong>20 MT</strong></div></div><div className="actions"><a className="btn-buy reveal delay-4" href="#quote">Request a quote →</a></div></div>
+      <div className="product-card"><div className="swatch-cu"></div><div className="spec">LME Grade A</div><h3>Copper Cathodes</h3><p className="reveal">99.99% Cu, 125&nbsp;kg sheets bundled to ~2&nbsp;t bundles. Registered on LME &amp; COMEX. Minimum order 25&nbsp;MT.</p><div className="product-meta"><div>Purity<strong>99.99% Cu</strong></div><div>Bundle<strong>~2 MT</strong></div><div>Lead time<strong>2–3 wks</strong></div><div>MOQ<strong>25 MT</strong></div></div><div className="actions"><a className="btn-buy reveal delay-4" href="#quote"><span className="roll-text"><span data-text="Request a quote →">Request a quote →</span></span></a></div></div>
+      <div className="product-card rod"><div className="swatch-cu"></div><div className="spec">8 mm CCR</div><h3>Continuous Cast Rods</h3><p className="reveal">Oxygen-free 8&nbsp;mm copper rod, 3.5-ton coils. Zero-defect feed ready for wire-drawing. Minimum order 20&nbsp;MT.</p><div className="product-meta"><div>Diameter<strong>8 mm</strong></div><div>Coil<strong>3.5 MT</strong></div><div>Lead time<strong>2 wks</strong></div><div>MOQ<strong>20 MT</strong></div></div><div className="actions"><a className="btn-buy reveal delay-4" href="#quote"><span className="roll-text"><span data-text="Request a quote →">Request a quote →</span></span></a></div></div>
     </div>
   </div>
 </section>
@@ -89,7 +89,7 @@ export default function Buy() {
           </label>
         </div>
         <label>Additional notes<textarea rows="4" placeholder="Delivery window, packaging preferences, certifications required"></textarea></label>
-        <div className="form-actions"><button type="submit" className="btn-primary">Request quote →</button><span className="form-sent" hidden></span></div>
+        <div className="form-actions"><button type="submit" className="btn-primary"><span className="roll-text"><span data-text="Request quote →">Request quote →</span></span></button><span className="form-sent" hidden></span></div>
       </form>
       <aside className="contact-side">
         <div className="contact-card"><div className="cc-label">Sales desk</div><a className="cc-link" href="mailto:sales@sterlitecopper.com">sales@sterlitecopper.com</a><a className="cc-link" href="tel:+914612345678">+91 461 234 5678</a><p className="reveal cc-note"  >Mon–Sat, 9:00–18:00 IST. Quotes returned within 1 business day.</p></div>
@@ -104,7 +104,7 @@ export default function Buy() {
 <section className="cta-band">
   <div className="cta-inner">
     <div><div className="eyebrow reveal">Or talk to us first</div><h2 className="reveal delay-1">Not ready for a quote? We can walk you through specs and logistics.</h2></div>
-    <div className="cta-btns"><a href="contact.html" className="btn-primary">Contact sales →</a><a href="business.html" className="btn-ghost">Product details</a></div>
+    <div className="cta-btns"><a href="contact.html" className="btn-primary"><span className="roll-text"><span data-text="Contact sales →">Contact sales →</span></span></a><a href="business.html" className="btn-ghost"><span className="roll-text"><span data-text="Product details">Product details</span></span></a></div>
   </div>
 </section>
 

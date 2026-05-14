@@ -47,10 +47,10 @@ export default function Sustainability() {
   <div className="ps-inner">
     <div className="section-head"><div className="eyebrow reveal">Community impact</div><h2 className="reveal delay-1">Programmes that make a material difference</h2></div>
     <div className="csr-grid reveal delay-3">
-      <figure className="csr-story"><img src="assets/csr1.png" alt="Tamira Surabhi" /><figcaption><span className="csr-label">Tamira Surabhi</span><strong>20,000+ women</strong><span className="csr-meta">Livelihood SHGs across 170 villages</span></figcaption></figure>
-      <figure className="csr-story"><img src="assets/pillar-people.png" alt="Education" /><figcaption><span className="csr-label">Education</span><strong>40,000 students</strong><span className="csr-meta">Smart classrooms &amp; scholarships</span></figcaption></figure>
-      <figure className="csr-story"><img src="assets/pillar-policies.png" alt="Mobile medical unit" /><figcaption><span className="csr-label">Health</span><strong>1.8 lakh check-ups</strong><span className="csr-meta">Mobile units + village clinics</span></figcaption></figure>
-      <figure className="csr-story"><img src="assets/pillar-company.png" alt="Pasumai Thoothukudi saplings" /><figcaption><span className="csr-label">Pasumai Thoothukudi</span><strong>1 million trees</strong><span className="csr-meta">Green-cover since 2007</span></figcaption></figure>
+      <figure className="csr-story scroll-zoom"><img src="assets/csr1.png" alt="Tamira Surabhi" /><figcaption><span className="csr-label">Tamira Surabhi</span><strong>20,000+ women</strong><span className="csr-meta">Livelihood SHGs across 170 villages</span></figcaption></figure>
+      <figure className="csr-story scroll-zoom"><img src="assets/pillar-people.png" alt="Education" /><figcaption><span className="csr-label">Education</span><strong>40,000 students</strong><span className="csr-meta">Smart classrooms &amp; scholarships</span></figcaption></figure>
+      <figure className="csr-story scroll-zoom"><img src="assets/pillar-policies.png" alt="Mobile medical unit" /><figcaption><span className="csr-label">Health</span><strong>1.8 lakh check-ups</strong><span className="csr-meta">Mobile units + village clinics</span></figcaption></figure>
+      <figure className="csr-story scroll-zoom"><img src="assets/pillar-company.png" alt="Pasumai Thoothukudi saplings" /><figcaption><span className="csr-label">Pasumai Thoothukudi</span><strong>1 million trees</strong><span className="csr-meta">Green-cover since 2007</span></figcaption></figure>
     </div>
   </div>
 </section>
@@ -58,7 +58,7 @@ export default function Sustainability() {
 <section className="cta-band">
   <div className="cta-inner">
     <div><div className="eyebrow reveal">Deep dive</div><h2 className="reveal delay-1">Read the full FY24 Sustainability Report</h2></div>
-    <div className="cta-btns"><a href="#" className="btn-primary">Download PDF (12.1 MB) →</a><a href="investors.html" className="btn-primary btn-sm">Governance</a></div>
+    <div className="cta-btns"><a href="#" className="btn-primary"><span className="roll-text"><span data-text="Download PDF (12.1 MB) →">Download PDF (12.1 MB) →</span></span></a><a href="investors.html" className="btn-primary btn-sm"><span className="roll-text"><span data-text="Governance">Governance</span></span></a></div>
   </div>
 </section>
 
