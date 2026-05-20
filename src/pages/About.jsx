@@ -1,4 +1,126 @@
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
+
+// Count-up ticker triggered on viewport entry
+function NumberTicker({ value }) {
+  const [displayValue, setDisplayValue] = useState('');
+  const ref = useRef(null);
+
+  useEffect(() => {
+    const clean = String(value).replace(/,/g, '');
+    const match = clean.match(/[\d\.]+/);
+    if (!match) { setDisplayValue(value); return; }
+
+    const num = parseFloat(match[0]);
+    const pre = clean.substring(0, clean.indexOf(match[0]));
+    const suf = clean.substring(clean.indexOf(match[0]) + match[0].length);
+    const dur = 1400;
+    let ts = null;
+
+    const observer = new IntersectionObserver((entries) => {
+      if (entries[0].isIntersecting) {
+        const step = (now) => {
+          if (!ts) ts = now;
+          const p = Math.min((now - ts) / dur, 1);
+          const ease = 1 - Math.pow(1 - p, 3);
+          const cur = ease * num;
+          const fmt = num % 1 === 0 ? Math.floor(cur).toLocaleString() : cur.toFixed(1);
+          setDisplayValue(`${pre}${fmt}${suf}`);
+          if (p < 1) requestAnimationFrame(step);
+        };
+        requestAnimationFrame(step);
+        observer.disconnect();
+      }
+    }, { threshold: 0.1 });
+
+    if (ref.current) observer.observe(ref.current);
+    return () => observer.disconnect();
+  }, [value]);
+
+  return <span ref={ref}>{displayValue || value}</span>;
+}
+
+
+function TypewriterAboutCTA() {
+  const [eyebrowText, setEyebrowText] = useState('');
+  const [headlineText, setHeadlineText] = useState('');
+  const [isIntersecting, setIsIntersecting] = useState(false);
+  const [activeStep, setActiveStep] = useState(0); // 0: idle, 1: eyebrow, 2: headline, 3: done
+  const containerRef = useRef(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting) {
+        setIsIntersecting(true);
+      } else {
+        setIsIntersecting(false);
+        setActiveStep(0);
+        setEyebrowText('');
+        setHeadlineText('');
+      }
+    }, { threshold: 0.1 });
+
+    if (containerRef.current) {
+      observer.observe(containerRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    if (!isIntersecting) return;
+
+    const startTimeout = setTimeout(() => {
+      setActiveStep(1); // start eyebrow
+    }, 400);
+
+    return () => clearTimeout(startTimeout);
+  }, [isIntersecting]);
+
+  // Eyebrow: Get in touch
+  useEffect(() => {
+    if (activeStep !== 1) return;
+    const txt = "Get in touch";
+    let idx = 0;
+    const interval = setInterval(() => {
+      setEyebrowText(txt.substring(0, idx + 1));
+      idx++;
+      if (idx >= txt.length) {
+        clearInterval(interval);
+        setTimeout(() => setActiveStep(2), 250);
+      }
+    }, 45);
+    return () => clearInterval(interval);
+  }, [activeStep]);
+
+  // Headline: Learn more about who we are
+  useEffect(() => {
+    if (activeStep !== 2) return;
+    const txt = "Learn more about who we are";
+    let idx = 0;
+    const interval = setInterval(() => {
+      setHeadlineText(txt.substring(0, idx + 1));
+      idx++;
+      if (idx >= txt.length) {
+        clearInterval(interval);
+        setActiveStep(3);
+      }
+    }, 35);
+    return () => clearInterval(interval);
+  }, [activeStep]);
+
+  return (
+    <div ref={containerRef}>
+      <div className="eyebrow reveal in" style={{ opacity: 1, transform: 'none' }}>
+        {eyebrowText}
+        {activeStep === 1 && <span className="typewriter-caret">|</span>}
+      </div>
+      <h2 className="reveal delay-1 in" style={{ opacity: 1, transform: 'none' }}>
+        {headlineText}
+        {activeStep === 2 && <span className="typewriter-caret">|</span>}
+      </h2>
+    </div>
+  );
+}
 
 export default function About() {
   return (
@@ -39,10 +161,10 @@ export default function About() {
   <div className="ps-inner">
     <div className="section-head"><div className="eyebrow reveal">At a glance</div><h2 className="reveal delay-1">The numbers behind the company</h2></div>
     <div className="stat-grid reveal delay-3">
-      <div className="stat-card reveal"><div className="stat-val">1996</div><div className="stat-lbl">Founded</div><p className="reveal">Operating continuously as part of Vedanta Limited.</p></div>
-      <div className="stat-card reveal"><div className="stat-val">400 K</div><div className="stat-lbl">MTPA smelter</div><p className="reveal">One of the largest single-location smelters globally.</p></div>
-      <div className="stat-card reveal"><div className="stat-val">36%</div><div className="stat-lbl">India's copper demand</div><p className="reveal">At peak operational capacity.</p></div>
-      <div className="stat-card reveal"><div className="stat-val">2.5 L+</div><div className="stat-lbl">Lives touched</div><p className="reveal">Through education, health &amp; livelihood programmes.</p></div>
+      <div className="stat-card reveal"><div className="stat-val"><NumberTicker value="1996" /></div><div className="stat-lbl">Founded</div><p className="reveal">Operating continuously as part of Vedanta Limited.</p></div>
+      <div className="stat-card reveal"><div className="stat-val"><NumberTicker value="400 K" /></div><div className="stat-lbl">MTPA smelter</div><p className="reveal">One of the largest single-location smelters globally.</p></div>
+      <div className="stat-card reveal"><div className="stat-val"><NumberTicker value="36%" /></div><div className="stat-lbl">India's copper demand</div><p className="reveal">At peak operational capacity.</p></div>
+      <div className="stat-card reveal"><div className="stat-val"><NumberTicker value="2.5 L+" /></div><div className="stat-lbl">Lives touched</div><p className="reveal">Through education, health &amp; livelihood programmes.</p></div>
     </div>
   </div>
 </section>
@@ -61,10 +183,7 @@ export default function About() {
 
 <section className="cta-band">
   <div className="cta-inner">
-    <div>
-      <div className="eyebrow reveal">Get in touch</div>
-      <h2 className="reveal delay-1">Learn more about who we are</h2>
-    </div>
+      <TypewriterAboutCTA />
     <div className="cta-btns">
       <a href="sustainability.html" className="btn-primary"><span className="roll-text"><span data-text="Sustainability report →">Sustainability report →</span></span></a>
       <a href="contact.html" className="btn-primary btn-sm"><span className="roll-text"><span data-text="Contact us">Contact us</span></span></a>

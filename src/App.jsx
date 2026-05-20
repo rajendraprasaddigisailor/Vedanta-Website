@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-route
 import useCommonSetup from './useCommonSetup';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
+import QuickLinksSidebar from './components/QuickLinksSidebar';
 import Home from './pages/Home';
 import About from './pages/About';
 import Business from './pages/Business';
@@ -27,6 +28,7 @@ export default function App() {
       <ScrollToTop />
       <SetupRunner />
       <Navbar />
+      <QuickLinksSidebar />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />

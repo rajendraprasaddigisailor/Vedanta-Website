@@ -1,6 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 export default function Contact() {
+  const [submitted, setSubmitted] = useState(false);
+
   return (
     <>
 
@@ -21,7 +23,7 @@ export default function Contact() {
         <section className="page-section" style={{ "paddingTop": "clamp(40px, 5vw, 60px)" }}>
           <div className="ps-inner">
             <div className="contact-grid reveal delay-3">
-              <form className="contact-form" onsubmit="event.preventDefault(); this.querySelector('.form-sent').hidden=false;">
+              <form className="contact-form" onSubmit={(e) => { e.preventDefault(); setSubmitted(true); }}>
                 <div className="section-head" style={{ "marginBottom": "24px" }}><div className="eyebrow reveal">Send us a message</div><h2 className="reveal delay-1">Tell us how we can help</h2></div>
                 <label className="reveal delay-2">Full name<input type="text" required placeholder="Your name" /></label>
                 <label className="reveal delay-3">Company / organisation<input type="text" placeholder="Optional" /></label>
@@ -42,14 +44,27 @@ export default function Contact() {
                   </select>
                 </label>
                 <label className="reveal delay-7">Message<textarea rows="5" required placeholder="Brief details so we can route you to the right person"></textarea></label>
-                <div className="form-actions reveal delay-8"><button type="submit" className="btn-primary"><span className="roll-text"><span data-text="Send message →">Send message →</span></span></button><span className="form-sent" hidden>✓ Thanks — we'll be in touch within 2 business days.</span></div>
+                <div className="form-actions reveal delay-8">
+                  <button type="submit" className="btn-primary">
+                    <span className="roll-text"><span data-text="Send message →">Send message →</span></span>
+                  </button>
+                  {submitted && <span className="form-sent">✓ Thanks — we'll be in touch within 2 business days.</span>}
+                </div>
               </form>
-              <aside className="contact-side">
-                <div className="contact-card reveal delay-1"><div className="cc-label">Corporate office</div><div className="cc-text"><strong>Sterlite Copper</strong><br />SIPCOT Industrial Complex,<br />Madurai Bypass Road, Thoothukudi<br />Tamil Nadu 628002, India</div></div>
-                <div className="contact-card reveal delay-2"><div className="cc-label">Sales enquiries</div><a className="cc-link" href="mailto:sales@sterlitecopper.com">sales@sterlitecopper.com</a><a className="cc-link" href="tel:+914612345678">+91 461 234 5678</a></div>
-                <div className="contact-card reveal delay-3"><div className="cc-label">Investor relations</div><a className="cc-link" href="mailto:ir@sterlitecopper.com">ir@sterlitecopper.com</a></div>
-                <div className="contact-card reveal delay-4"><div className="cc-label">Media desk</div><a className="cc-link" href="mailto:media@sterlitecopper.com">media@sterlitecopper.com</a></div>
-                <div className="contact-card reveal delay-5"><div className="cc-label">Grievance cell</div><a className="cc-link" href="mailto:grievance@sterlitecopper.com">grievance@sterlitecopper.com</a><p className="reveal cc-note"  >Anonymous reporting via our whistleblower channel is also available on the Investors page.</p></div>
+              <aside className="contact-side marquee-wrapper-vertical">
+                <div className="marquee-track-vertical">
+                  <div className="contact-card"><div className="cc-label">Corporate office</div><div className="cc-text"><strong className="modern-brand-text-card">Sterlite Copper</strong><br />SIPCOT Industrial Complex,<br />Madurai Bypass Road, Thoothukudi<br />Tamil Nadu 628002, India</div></div>
+                  <div className="contact-card"><div className="cc-label">Sales enquiries</div><a className="cc-link" href="mailto:sales@sterlitecopper.com">sales@sterlitecopper.com</a><a className="cc-link" href="tel:+914612345678">+91 461 234 5678</a></div>
+                  <div className="contact-card"><div className="cc-label">Investor relations</div><a className="cc-link" href="mailto:ir@sterlitecopper.com">ir@sterlitecopper.com</a></div>
+                  <div className="contact-card"><div className="cc-label">Media desk</div><a className="cc-link" href="mailto:media@sterlitecopper.com">media@sterlitecopper.com</a></div>
+                  <div className="contact-card"><div className="cc-label">Grievance cell</div><a className="cc-link" href="mailto:grievance@sterlitecopper.com">grievance@sterlitecopper.com</a><p className="cc-note"  >Anonymous reporting via our whistleblower channel is also available on the Investors page.</p></div>
+                  {/* Duplicate for infinite vertical marquee loop */}
+                  <div className="contact-card"><div className="cc-label">Corporate office</div><div className="cc-text"><strong className="modern-brand-text-card">Sterlite Copper</strong><br />SIPCOT Industrial Complex,<br />Madurai Bypass Road, Thoothukudi<br />Tamil Nadu 628002, India</div></div>
+                  <div className="contact-card"><div className="cc-label">Sales enquiries</div><a className="cc-link" href="mailto:sales@sterlitecopper.com">sales@sterlitecopper.com</a><a className="cc-link" href="tel:+914612345678">+91 461 234 5678</a></div>
+                  <div className="contact-card"><div className="cc-label">Investor relations</div><a className="cc-link" href="mailto:ir@sterlitecopper.com">ir@sterlitecopper.com</a></div>
+                  <div className="contact-card"><div className="cc-label">Media desk</div><a className="cc-link" href="mailto:media@sterlitecopper.com">media@sterlitecopper.com</a></div>
+                  <div className="contact-card"><div className="cc-label">Grievance cell</div><a className="cc-link" href="mailto:grievance@sterlitecopper.com">grievance@sterlitecopper.com</a><p className="cc-note"  >Anonymous reporting via our whistleblower channel is also available on the Investors page.</p></div>
+                </div>
               </aside>
             </div>
           </div>

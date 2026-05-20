@@ -1,6 +1,468 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
+
+// Universal dynamic IntersectionObserver count-up number ticker
+function NumberTicker({ value }) {
+  const [displayValue, setDisplayValue] = React.useState('');
+  const elementRef = React.useRef(null);
+
+  React.useEffect(() => {
+    const cleanString = String(value).replace(/,/g, '');
+    const numMatch = cleanString.match(/[\d\.]+/);
+    if (!numMatch) {
+      setDisplayValue(value);
+      return;
+    }
+
+    const numValue = parseFloat(numMatch[0]);
+    const numIndex = cleanString.indexOf(numMatch[0]);
+    const prefix = cleanString.substring(0, numIndex);
+    const suffix = cleanString.substring(numIndex + numMatch[0].length);
+
+    const duration = 1200; // 1.2s count up
+    let startTimestamp = null;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting) {
+          const step = (timestamp) => {
+            if (!startTimestamp) startTimestamp = timestamp;
+            const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+            // Ease out cubic
+            const easeProgress = 1 - Math.pow(1 - progress, 3);
+            const current = easeProgress * numValue;
+
+            let formattedNum;
+            if (numValue % 1 === 0) {
+              formattedNum = Math.floor(current).toLocaleString();
+            } else {
+              formattedNum = current.toFixed(1);
+            }
+
+            setDisplayValue(`${prefix}${formattedNum}${suffix}`);
+
+            if (progress < 1) {
+              window.requestAnimationFrame(step);
+            }
+          };
+          window.requestAnimationFrame(step);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.1 }
+    );
+
+    if (elementRef.current) {
+      observer.observe(elementRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, [value]);
+
+  return <span ref={elementRef}>{displayValue || value}</span>;
+}
+
+function TypewriterGlanceHeader() {
+  const [eyebrowText, setEyebrowText] = React.useState('');
+  const [headlineText, setHeadlineText] = React.useState('');
+  const [isIntersecting, setIsIntersecting] = React.useState(false);
+  const [activeStep, setActiveStep] = React.useState(0);
+  const containerRef = React.useRef(null);
+
+  React.useEffect(() => {
+    const observer = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting) {
+        setIsIntersecting(true);
+      } else {
+        setIsIntersecting(false);
+        setActiveStep(0);
+        setEyebrowText('');
+        setHeadlineText('');
+      }
+    }, { threshold: 0.1 });
+    if (containerRef.current) observer.observe(containerRef.current);
+    return () => observer.disconnect();
+  }, []);
+
+  React.useEffect(() => {
+    if (!isIntersecting) return;
+    const startTimeout = setTimeout(() => setActiveStep(1), 400);
+    return () => clearTimeout(startTimeout);
+  }, [isIntersecting]);
+
+  React.useEffect(() => {
+    if (activeStep !== 1) return;
+    const txt = "About Sterlite Copper";
+    let idx = 0;
+    const interval = setInterval(() => {
+      setEyebrowText(txt.substring(0, idx + 1));
+      idx++;
+      if (idx >= txt.length) {
+        clearInterval(interval);
+        setTimeout(() => setActiveStep(2), 250);
+      }
+    }, 45);
+    return () => clearInterval(interval);
+  }, [activeStep]);
+
+  React.useEffect(() => {
+    if (activeStep !== 2) return;
+    const txt = "Sterlite Copper at a Glance";
+    let idx = 0;
+    const interval = setInterval(() => {
+      setHeadlineText(txt.substring(0, idx + 1));
+      idx++;
+      if (idx >= txt.length) {
+        clearInterval(interval);
+        setActiveStep(3);
+      }
+    }, 35);
+    return () => clearInterval(interval);
+  }, [activeStep]);
+
+  return (
+    <div ref={containerRef}>
+      <div className="eyebrow reveal in" style={{ opacity: 1, transform: 'none' }}>
+        {eyebrowText}
+        {activeStep === 1 && <span className="typewriter-caret">|</span>}
+      </div>
+      <h2 className="h-section reveal delay-1 in" style={{ opacity: 1, transform: 'none' }}>
+        {headlineText}
+        {activeStep === 2 && <span className="typewriter-caret">|</span>}
+      </h2>
+    </div>
+  );
+}
+
+function TypewriterSocialHeader() {
+  const [eyebrowText, setEyebrowText] = React.useState('');
+  const [headlineText, setHeadlineText] = React.useState('');
+  const [btnText, setBtnText] = React.useState('');
+  const [isIntersecting, setIsIntersecting] = React.useState(false);
+  const [activeStep, setActiveStep] = React.useState(0); // 0: idle, 1: eyebrow, 2: headline, 3: button, 4: done
+  const containerRef = React.useRef(null);
+
+  React.useEffect(() => {
+    const observer = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting) {
+        setIsIntersecting(true);
+      } else {
+        setIsIntersecting(false);
+        setActiveStep(0);
+        setEyebrowText('');
+        setHeadlineText('');
+        setBtnText('');
+      }
+    }, { threshold: 0.1 });
+
+    if (containerRef.current) {
+      observer.observe(containerRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
+
+  React.useEffect(() => {
+    if (!isIntersecting) return;
+
+    const startTimeout = setTimeout(() => {
+      setActiveStep(1); // start typing eyebrow
+    }, 400);
+
+    return () => clearTimeout(startTimeout);
+  }, [isIntersecting]);
+
+  // Eyebrow: Stay connected
+  React.useEffect(() => {
+    if (activeStep !== 1) return;
+    const txt = "Stay connected";
+    let idx = 0;
+    const interval = setInterval(() => {
+      setEyebrowText(txt.substring(0, idx + 1));
+      idx++;
+      if (idx >= txt.length) {
+        clearInterval(interval);
+        setTimeout(() => setActiveStep(2), 250);
+      }
+    }, 45);
+    return () => clearInterval(interval);
+  }, [activeStep]);
+
+  // Headline: Social Media Updates
+  React.useEffect(() => {
+    if (activeStep !== 2) return;
+    const txt = "Social Media Updates";
+    let idx = 0;
+    const interval = setInterval(() => {
+      setHeadlineText(txt.substring(0, idx + 1));
+      idx++;
+      if (idx >= txt.length) {
+        clearInterval(interval);
+        setTimeout(() => setActiveStep(3), 250);
+      }
+    }, 35);
+    return () => clearInterval(interval);
+  }, [activeStep]);
+
+  // Button text: Follow us
+  React.useEffect(() => {
+    if (activeStep !== 3) return;
+    const txt = "Follow us";
+    let idx = 0;
+    const interval = setInterval(() => {
+      setBtnText(txt.substring(0, idx + 1));
+      idx++;
+      if (idx >= txt.length) {
+        clearInterval(interval);
+        setActiveStep(4); // All steps completed
+      }
+    }, 50);
+    return () => clearInterval(interval);
+  }, [activeStep]);
+
+  return (
+    <div ref={containerRef} className="social-left">
+      <span className="sub reveal delay-1 in" style={{ opacity: 1, transform: 'none' }}>
+        {eyebrowText}
+        {activeStep === 1 && <span className="typewriter-caret">|</span>}
+      </span>
+      <h2 className="reveal delay-2 in" style={{ opacity: 1, transform: 'none', margin: '12px 0 28px 0' }}>
+        {headlineText}
+        {activeStep === 2 && <span className="typewriter-caret">|</span>}
+      </h2>
+      <button 
+        className={`btn-primary reveal delay-3 ${activeStep >= 3 ? 'in' : ''}`}
+        style={{ 
+          opacity: activeStep >= 3 ? 1 : 0, 
+          transform: activeStep >= 3 ? 'translateY(0)' : 'translateY(15px)',
+          transition: 'all 0.6s cubic-bezier(0.16, 1, 0.3, 1)',
+          display: 'inline-flex',
+          alignItems: 'center',
+          gap: '10px'
+        }}
+      >
+        <span className="roll-text">
+          <span data-text="Follow us">
+            {btnText}
+            {activeStep === 3 && <span className="typewriter-caret">|</span>}
+          </span>
+        </span>
+        <svg 
+          width="18" 
+          height="18" 
+          viewBox="0 0 24 24" 
+          fill="none" 
+          stroke="currentColor" 
+          strokeWidth="2.5" 
+          strokeLinecap="round"
+          style={{
+            opacity: activeStep >= 4 ? 1 : 0,
+            transform: activeStep >= 4 ? 'translateX(0)' : 'translateX(-5px)',
+            transition: 'all 0.4s ease'
+          }}
+        >
+          <path d="M5 12h14M13 5l7 7-7 7"/>
+        </svg>
+      </button>
+    </div>
+  );
+}
+
+function TypewriterCSR() {
+  const [eyebrowText, setEyebrowText] = React.useState('');
+  const [headlineText, setHeadlineText] = React.useState('');
+  const [ledeText, setLedeText] = React.useState('');
+  const [bodyText, setBodyText] = React.useState('');
+  const [btnText, setBtnText] = React.useState('');
+  const [isIntersecting, setIsIntersecting] = React.useState(false);
+  const [activeStep, setActiveStep] = React.useState(0); // 0: idle, 1: eyebrow, 2: headline, 3: lede, 4: body, 5: button, 6: done
+  const containerRef = React.useRef(null);
+
+  React.useEffect(() => {
+    const observer = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting) {
+        setIsIntersecting(true);
+      } else {
+        setIsIntersecting(false);
+        setActiveStep(0);
+        setEyebrowText('');
+        setHeadlineText('');
+        setLedeText('');
+        setBodyText('');
+        setBtnText('');
+      }
+    }, { threshold: 0.1 });
+
+    if (containerRef.current) {
+      observer.observe(containerRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
+
+  React.useEffect(() => {
+    if (!isIntersecting) return;
+
+    const startTimeout = setTimeout(() => {
+      setActiveStep(1); // start eyebrow
+    }, 400);
+
+    return () => clearTimeout(startTimeout);
+  }, [isIntersecting]);
+
+  // Eyebrow: Social Responsibility
+  React.useEffect(() => {
+    if (activeStep !== 1) return;
+    const txt = "Social Responsibility";
+    let idx = 0;
+    const interval = setInterval(() => {
+      setEyebrowText(txt.substring(0, idx + 1));
+      idx++;
+      if (idx >= txt.length) {
+        clearInterval(interval);
+        setTimeout(() => setActiveStep(2), 200);
+      }
+    }, 40);
+    return () => clearInterval(interval);
+  }, [activeStep]);
+
+  // Headline: Corporate Social Responsibility
+  React.useEffect(() => {
+    if (activeStep !== 2) return;
+    const txt = "Corporate Social Responsibility";
+    let idx = 0;
+    const interval = setInterval(() => {
+      setHeadlineText(txt.substring(0, idx + 1));
+      idx++;
+      if (idx >= txt.length) {
+        clearInterval(interval);
+        setTimeout(() => setActiveStep(3), 200);
+      }
+    }, 30);
+    return () => clearInterval(interval);
+  }, [activeStep]);
+
+  // Lede paragraph
+  React.useEffect(() => {
+    if (activeStep !== 3) return;
+    const txt = "Sterlite Copper has woven social responsibility into its business fabric right from its inception in 1996–1997.";
+    let idx = 0;
+    const interval = setInterval(() => {
+      setLedeText(txt.substring(0, idx + 1));
+      idx++;
+      if (idx >= txt.length) {
+        clearInterval(interval);
+        setTimeout(() => setActiveStep(4), 200);
+      }
+    }, 20);
+    return () => clearInterval(interval);
+  }, [activeStep]);
+
+  // Body paragraph
+  React.useEffect(() => {
+    if (activeStep !== 4) return;
+    const txt = "The company believes that business objectives should include overall development of communities around its surrounding areas. The aim has always been to go beyond mere 'Corporate Social Responsibility' to understand the real needs and genuine concerns of the people — and provide the necessary stimulus to not only address these issues but ensure social involvement, acceptability and sustainability.";
+    let idx = 0;
+    const interval = setInterval(() => {
+      setBodyText(txt.substring(0, idx + 1));
+      idx++;
+      if (idx >= txt.length) {
+        clearInterval(interval);
+        setTimeout(() => setActiveStep(5), 200);
+      }
+    }, 10); // rapid typing for massive paragraph
+    return () => clearInterval(interval);
+  }, [activeStep]);
+
+  // Button text: Read More
+  React.useEffect(() => {
+    if (activeStep !== 5) return;
+    const txt = "Read More";
+    let idx = 0;
+    const interval = setInterval(() => {
+      setBtnText(txt.substring(0, idx + 1));
+      idx++;
+      if (idx >= txt.length) {
+        clearInterval(interval);
+        setActiveStep(6);
+      }
+    }, 45);
+    return () => clearInterval(interval);
+  }, [activeStep]);
+
+  return (
+    <div ref={containerRef} className="csr-left">
+      <div className="eyebrow reveal in" style={{ color: "var(--green)", opacity: 1, transform: "none" }}>
+        {eyebrowText}
+        {activeStep === 1 && <span className="typewriter-caret">|</span>}
+      </div>
+      <h2 className="reveal h-section in" style={{ color: "#fff", opacity: 1, transform: "none", margin: '16px 0 24px 0' }}>
+        {headlineText}
+        {activeStep === 2 && <span className="typewriter-caret">|</span>}
+      </h2>
+      <p className="lede reveal in" style={{ opacity: 1, transform: "none" }}>
+        {ledeText}
+        {activeStep === 3 && <span className="typewriter-caret">|</span>}
+      </p>
+      <p className="reveal in" style={{ opacity: 1, transform: "none", marginBottom: '32px' }}>
+        {bodyText}
+        {activeStep === 4 && <span className="typewriter-caret">|</span>}
+      </p>
+      <button 
+        className={`btn-primary reveal ${activeStep >= 5 ? 'in' : ''}`}
+        style={{ 
+          opacity: activeStep >= 5 ? 1 : 0, 
+          transform: activeStep >= 5 ? 'translateY(0)' : 'translateY(15px)',
+          transition: 'all 0.6s cubic-bezier(0.16, 1, 0.3, 1)',
+          display: 'inline-flex',
+          alignItems: 'center',
+          gap: '10px'
+        }}
+      >
+        <span className="roll-text">
+          <span data-text="Read More">
+            {btnText}
+            {activeStep === 5 && <span className="typewriter-caret">|</span>}
+          </span>
+        </span>
+        <svg 
+          width="18" 
+          height="18" 
+          viewBox="0 0 24 24" 
+          fill="none" 
+          stroke="currentColor" 
+          strokeWidth="2.5" 
+          strokeLinecap="round"
+          style={{
+            opacity: activeStep >= 6 ? 1 : 0,
+            transform: activeStep >= 6 ? 'translateX(0)' : 'translateX(-5px)',
+            transition: 'all 0.4s ease'
+          }}
+        >
+          <path d="M5 12h14M13 5l7 7-7 7"/>
+        </svg>
+      </button>
+    </div>
+  );
+}
 
 export default function Home() {
+  const location = useLocation();
+
+  useEffect(() => {
+    const params = new URLSearchParams(location.search);
+    const scrollTarget = params.get('scroll');
+    if (scrollTarget) {
+      const timer = setTimeout(() => {
+        const element = document.querySelector(scrollTarget);
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      }, 150);
+      return () => clearTimeout(timer);
+    }
+  }, [location]);
+
   return (
     <>
 
@@ -59,10 +521,9 @@ export default function Home() {
 </div>
 
 {/*  GLANCE  */}
-<section className="glance">
+<section id="glance" className="glance">
   <div>
-    <div className="eyebrow reveal">About Sterlite Copper</div>
-    <h2 className="h-section reveal delay-1">Sterlite Copper at a Glance</h2>
+    <TypewriterGlanceHeader />
     <p className="lede reveal delay-2">Sterlite Copper represents a key aspect of Vedanta Limited's Copper Business. Since its inception in 1996, we have steadily grown to become a leading contributor to copper production in India — contributing upto 36% of India's demand for refined copper.</p>
     <p className="copy reveal delay-3">Currently, we operate a 400,000 Metric Tonnes Per Annum (MTPA) Copper Smelter with associated facilities — a Refinery and Copper Rod Plant, a Sulphuric Acid plant of more than 12,00,000 MTPA and a Phosphoric Acid plant of 220,000 MTPA at Thoothukudi, Tamil Nadu. Sterlite Copper also operates a 160 MW coal-based power plant in Thoothukudi.</p>
 
@@ -260,7 +721,7 @@ export default function Home() {
       </div>
       <div className="actions">
         <button className="btn-buy reveal delay-4"><span className="roll-text"><span data-text="Enquire →">Enquire →</span></span></button>
-        <button className="btn-ds"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M12 3v14m0 0l-5-5m5 5l5-5M5 21h14"/></svg>MSDS</button>
+        <button className="btn-ds"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M12 3v14m0 0l-5-5m5 5l5-5M5 21h14"/></svg><span className="roll-text"><span data-text="MSDS">MSDS</span></span></button>
       </div>
     </div>
     <div className="product-card phos">
@@ -274,7 +735,7 @@ export default function Home() {
       </div>
       <div className="actions">
         <button className="btn-buy reveal delay-4"><span className="roll-text"><span data-text="Enquire →">Enquire →</span></span></button>
-        <button className="btn-ds"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M12 3v14m0 0l-5-5m5 5l5-5M5 21h14"/></svg>MSDS</button>
+        <button className="btn-ds"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M12 3v14m0 0l-5-5m5 5l5-5M5 21h14"/></svg><span className="roll-text"><span data-text="MSDS">MSDS</span></span></button>
       </div>
     </div>
     <div className="product-card slag">
@@ -308,11 +769,11 @@ export default function Home() {
 </section>
 
 {/*  ESG LIVE DASHBOARD  */}
-<section className="esg" aria-label="Live sustainability dashboard">
-  <div className="esg-head">
-    <div className="eyebrow reveal" style={{"justifyContent":"center","display":"inline-flex"}}>Transparency</div>
-    <h2 className="reveal delay-1">Our sustainability, in real numbers</h2>
-    <div className="live reveal delay-2"><span className="live-dot"></span>Last updated 12 Oct 2024 · auto-refreshed monthly</div>
+<section id="sustainability-dashboard" className="esg" aria-label="Live sustainability dashboard">
+  <div className="esg-head" style={{"textAlign":"left","marginBottom":"40px"}}>
+    <div className="eyebrow reveal" style={{"justifyContent":"flex-start","display":"inline-flex"}}>Transparency</div>
+    <h2 className="reveal delay-1" style={{"margin":"8px 0 12px 0","textAlign":"left"}}>Our sustainability, in real numbers</h2>
+    <div className="live reveal delay-2" style={{"display":"inline-flex","alignItems":"center","gap":"10px"}}><span className="live-dot"></span>Last updated 12 Oct 2024 · auto-refreshed monthly</div>
   </div>
   <div className="esg-grid reveal delay-3">
     <div className="esg-card reveal">
@@ -345,54 +806,80 @@ export default function Home() {
 {/*  CSR  */}
 <section className="csr">
   <div className="csr-inner">
-    <div className="csr-left">
-      <div className="eyebrow reveal" style={{"color":"var(--green)"}}>Social Responsibility</div>
-      <h2 className="reveal delay-1 h-section" style={{"color":"#fff"}}>Corporate Social Responsibility</h2>
-      <p className="lede reveal delay-2">Sterlite Copper has woven social responsibility into its business fabric right from its inception in 1996–1997.</p>
-      <p className="reveal">The company believes that business objectives should include overall development of communities around its surrounding areas. The aim has always been to go beyond mere 'Corporate Social Responsibility' to understand the real needs and genuine concerns of the people — and provide the necessary stimulus to not only address these issues but ensure social involvement, acceptability and sustainability.</p>
-      <button className="btn-primary reveal delay-4">
-        <span className="roll-text"><span data-text="Read More">Read More</span></span>
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
-      </button>
-    </div>
+    <TypewriterCSR />
     <div className="csr-right reveal delay-3">
       <div className="csr-tag">
         <span className="sub">Working since 1997 towards</span>
         <span className="tag">Women Empowerment</span>
       </div>
-      <div className="csr-grid reveal delay-3">
-        <figure className="csr-story">
-          <img src="assets/csr1.png" alt="Tamira Surabhi self-help collective — women gathered around production materials" loading="lazy" />
-          <figcaption>
-            <span className="csr-label">Tamira Surabhi</span>
-            <strong>20,000+ women</strong>
-            <span className="csr-meta">Livelihood SHGs across 170 villages</span>
-          </figcaption>
-        </figure>
-        <figure className="csr-story">
-          <img src="assets/pillar-people.png" alt="Students in a Sterlite-supported government school classroom" loading="lazy" />
-          <figcaption>
-            <span className="csr-label">Education</span>
-            <strong>40,000 students</strong>
-            <span className="csr-meta">Smart classrooms &amp; scholarships</span>
-          </figcaption>
-        </figure>
-        <figure className="csr-story">
-          <img src="assets/pillar-policies.png" alt="Mobile medical unit serving rural communities around Thoothukudi" loading="lazy" />
-          <figcaption>
-            <span className="csr-label">Health</span>
-            <strong>1.8 lakh check-ups</strong>
-            <span className="csr-meta">Mobile units + village clinics</span>
-          </figcaption>
-        </figure>
-        <figure className="csr-story">
-          <img src="assets/contact_hero.png" alt="Saplings planted under the Pasumai Thoothukudi green cover initiative" loading="lazy" />
-          <figcaption>
-            <span className="csr-label">Pasumai Thoothukudi</span>
-            <strong>1 million trees</strong>
-            <span className="csr-meta">Green-cover initiative since 2007</span>
-          </figcaption>
-        </figure>
+      <div className="marquee-wrapper-horizontal reveal delay-3">
+        <div className="marquee-track-horizontal">
+          <figure className="csr-story">
+            <img src="assets/csr1.png" alt="Tamira Surabhi self-help collective — women gathered around production materials" loading="lazy" />
+            <figcaption>
+              <span className="csr-label">Tamira Surabhi</span>
+              <strong>20,000+ women</strong>
+              <span className="csr-meta">Livelihood SHGs across 170 villages</span>
+            </figcaption>
+          </figure>
+          <figure className="csr-story">
+            <img src="assets/pillar-people.png" alt="Students in a Sterlite-supported government school classroom" loading="lazy" />
+            <figcaption>
+              <span className="csr-label">Education</span>
+              <strong>40,000 students</strong>
+              <span className="csr-meta">Smart classrooms &amp; scholarships</span>
+            </figcaption>
+          </figure>
+          <figure className="csr-story">
+            <img src="assets/pillar-policies.png" alt="Mobile medical unit serving rural communities around Thoothukudi" loading="lazy" />
+            <figcaption>
+              <span className="csr-label">Health</span>
+              <strong>1.8 lakh check-ups</strong>
+              <span className="csr-meta">Mobile units + village clinics</span>
+            </figcaption>
+          </figure>
+          <figure className="csr-story">
+            <img src="assets/contact_hero.png" alt="Saplings planted under the Pasumai Thoothukudi green cover initiative" loading="lazy" />
+            <figcaption>
+              <span className="csr-label">Pasumai Thoothukudi</span>
+              <strong>1 million trees</strong>
+              <span className="csr-meta">Green-cover initiative since 2007</span>
+            </figcaption>
+          </figure>
+          {/* Duplicates for infinite scrolling */}
+          <figure className="csr-story">
+            <img src="assets/csr1.png" alt="Tamira Surabhi self-help collective — women gathered around production materials" loading="lazy" />
+            <figcaption>
+              <span className="csr-label">Tamira Surabhi</span>
+              <strong>20,000+ women</strong>
+              <span className="csr-meta">Livelihood SHGs across 170 villages</span>
+            </figcaption>
+          </figure>
+          <figure className="csr-story">
+            <img src="assets/pillar-people.png" alt="Students in a Sterlite-supported government school classroom" loading="lazy" />
+            <figcaption>
+              <span className="csr-label">Education</span>
+              <strong>40,000 students</strong>
+              <span className="csr-meta">Smart classrooms &amp; scholarships</span>
+            </figcaption>
+          </figure>
+          <figure className="csr-story">
+            <img src="assets/pillar-policies.png" alt="Mobile medical unit serving rural communities around Thoothukudi" loading="lazy" />
+            <figcaption>
+              <span className="csr-label">Health</span>
+              <strong>1.8 lakh check-ups</strong>
+              <span className="csr-meta">Mobile units + village clinics</span>
+            </figcaption>
+          </figure>
+          <figure className="csr-story">
+            <img src="assets/contact_hero.png" alt="Saplings planted under the Pasumai Thoothukudi green cover initiative" loading="lazy" />
+            <figcaption>
+              <span className="csr-label">Pasumai Thoothukudi</span>
+              <strong>1 million trees</strong>
+              <span className="csr-meta">Green-cover initiative since 2007</span>
+            </figcaption>
+          </figure>
+        </div>
       </div>
     </div>
   </div>
@@ -452,49 +939,73 @@ export default function Home() {
 {/*  SOCIAL  */}
 <section className="social reveal">
   <div className="social-inner">
-    <div className="social-left">
-      <span className="sub reveal delay-1">Stay connected</span>
-      <h2 className="reveal delay-2">Social Media Updates</h2>
-      <button className="btn-primary reveal delay-3">
-        <span className="roll-text"><span data-text="Follow us">Follow us</span></span>
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
-      </button>
-    </div>
-    <div className="social-cards reveal delay-4">
-      <div className="social-card reveal">
-        <div className="plat"><span className="plat-icon">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><circle cx="17.5" cy="6.5" r="0.5" fill="currentColor"/></svg>
-        </span>Instagram</div>
-        <p className="reveal txt"  >New video: Behind the scenes at our Thoothukudi smelter 🔥</p>
-        <div className="meta"><span>❤ 2.4k</span><span>💬 86</span></div>
-      </div>
-      <div className="social-card reveal delay-1">
-        <div className="plat"><span className="plat-icon">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
-        </span>Facebook</div>
-        <p className="reveal txt"  >Sterlite Copper partners with Pasumai Thoothukudi — 1 million trees planted across Tamil Nadu.</p>
-        <div className="meta"><span>👍 3.1k</span><span>💬 124</span></div>
-      </div>
-      <div className="social-card reveal delay-2">
-        <div className="plat"><span className="plat-icon">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14M8.339 18.338V9.846H5.692v8.492h2.647zM7.015 8.71a1.533 1.533 0 1 0-.015-3.065 1.533 1.533 0 0 0 .015 3.065zm11.323 9.628v-4.65c0-2.449-1.306-3.589-3.048-3.589a2.631 2.631 0 0 0-2.393 1.316V9.846h-2.653c.035.748 0 8.492 0 8.492h2.653v-4.742a1.817 1.817 0 0 1 .087-.647 1.451 1.451 0 0 1 1.36-.97c.96 0 1.343.732 1.343 1.804v4.555z"/></svg>
-        </span>LinkedIn</div>
-        <p className="reveal txt"  >Proud to share our FY24 ESG report — see what sustainability looks like at 400K MTPA scale.</p>
-        <div className="meta"><span>👍 1.8k</span><span>💬 46</span></div>
-      </div>
-      <div className="social-card reveal delay-3">
-        <div className="plat"><span className="plat-icon">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
-        </span>X (Twitter)</div>
-        <p className="reveal txt"  >542 MT of medical oxygen supplied during COVID. We'll never forget. 🇮🇳</p>
-        <div className="meta"><span>🔁 892</span><span>❤ 4.1k</span></div>
+    <TypewriterSocialHeader />
+    <div className="marquee-wrapper-horizontal reveal delay-4">
+      <div className="marquee-track-horizontal">
+        <div className="social-card reveal">
+          <div className="plat"><span className="plat-icon">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><circle cx="17.5" cy="6.5" r="0.5" fill="currentColor"/></svg>
+          </span>Instagram</div>
+          <p className="reveal txt">New video: Behind the scenes at our Thoothukudi smelter 🔥</p>
+          <div className="meta"><span>❤ 2.4k</span><span>💬 86</span></div>
+        </div>
+        <div className="social-card reveal delay-1">
+          <div className="plat"><span className="plat-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+          </span>Facebook</div>
+          <p className="reveal txt">Sterlite Copper partners with Pasumai Thoothukudi — 1 million trees planted across Tamil Nadu.</p>
+          <div className="meta"><span>👍 3.1k</span><span>💬 124</span></div>
+        </div>
+        <div className="social-card reveal delay-2">
+          <div className="plat"><span className="plat-icon">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14M8.339 18.338V9.846H5.692v8.492h2.647zM7.015 8.71a1.533 1.533 0 1 0-.015-3.065 1.533 1.533 0 0 0 .015 3.065zm11.323 9.628v-4.65c0-2.449-1.306-3.589-3.048-3.589a2.631 2.631 0 0 0-2.393 1.316V9.846h-2.653c.035.748 0 8.492 0 8.492h2.653v-4.742a1.817 1.817 0 0 1 .087-.647 1.451 1.451 0 0 1 1.36-.97c.96 0 1.343.732 1.343 1.804v4.555z"/></svg>
+          </span>LinkedIn</div>
+          <p className="reveal txt">Proud to share our FY24 ESG report — see what sustainability looks like at 400K MTPA scale.</p>
+          <div className="meta"><span>👍 1.8k</span><span>💬 46</span></div>
+        </div>
+        <div className="social-card reveal delay-3">
+          <div className="plat"><span className="plat-icon">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+          </span>X (Twitter)</div>
+          <p className="reveal txt">542 MT of medical oxygen supplied during COVID. We'll never forget. 🇮🇳</p>
+          <div className="meta"><span>🔁 892</span><span>❤ 4.1k</span></div>
+        </div>
+        {/* Duplicates for infinite scrolling */}
+        <div className="social-card reveal">
+          <div className="plat"><span className="plat-icon">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><circle cx="17.5" cy="6.5" r="0.5" fill="currentColor"/></svg>
+          </span>Instagram</div>
+          <p className="reveal txt">New video: Behind the scenes at our Thoothukudi smelter 🔥</p>
+          <div className="meta"><span>❤ 2.4k</span><span>💬 86</span></div>
+        </div>
+        <div className="social-card reveal delay-1">
+          <div className="plat"><span className="plat-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+          </span>Facebook</div>
+          <p className="reveal txt">Sterlite Copper partners with Pasumai Thoothukudi — 1 million trees planted across Tamil Nadu.</p>
+          <div className="meta"><span>👍 3.1k</span><span>💬 124</span></div>
+        </div>
+        <div className="social-card reveal delay-2">
+          <div className="plat"><span className="plat-icon">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14M8.339 18.338V9.846H5.692v8.492h2.647zM7.015 8.71a1.533 1.533 0 1 0-.015-3.065 1.533 1.533 0 0 0 .015 3.065zm11.323 9.628v-4.65c0-2.449-1.306-3.589-3.048-3.589a2.631 2.631 0 0 0-2.393 1.316V9.846h-2.653c.035.748 0 8.492 0 8.492h2.653v-4.742a1.817 1.817 0 0 1 .087-.647 1.451 1.451 0 0 1 1.36-.97c.96 0 1.343.732 1.343 1.804v4.555z"/></svg>
+          </span>LinkedIn</div>
+          <p className="reveal txt">Proud to share our FY24 ESG report — see what sustainability looks like at 400K MTPA scale.</p>
+          <div className="meta"><span>👍 1.8k</span><span>💬 46</span></div>
+        </div>
+        <div className="social-card reveal delay-3">
+          <div className="plat"><span className="plat-icon">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+          </span>X (Twitter)</div>
+          <p className="reveal txt">542 MT of medical oxygen supplied during COVID. We'll never forget. 🇮🇳</p>
+          <div className="meta"><span>🔁 892</span><span>❤ 4.1k</span></div>
+        </div>
       </div>
     </div>
   </div>
 </section>
 
 {/*  INVESTOR FINANCIAL TILES  */}
-<section className="fin-tiles" aria-label="Investor highlights">
+<section id="investor-highlights" className="fin-tiles" aria-label="Investor highlights">
   <div className="fin-inner">
     <div className="fin-head">
       <div>
@@ -510,25 +1021,25 @@ export default function Home() {
     <div className="fin-grid reveal delay-3">
       <div className="fin-tile reveal">
         <div className="kpi-lab">Revenue</div>
-        <div className="kpi-val">₹24,830 Cr</div>
+        <div className="kpi-val"><NumberTicker value="₹24,830 Cr" /></div>
         <div className="kpi-delta up">▲ 12.4% YoY</div>
         <div className="kpi-caption">Consolidated FY24 copper business</div>
       </div>
       <div className="fin-tile reveal">
         <div className="kpi-lab">EBITDA</div>
-        <div className="kpi-val">₹3,190 Cr</div>
+        <div className="kpi-val"><NumberTicker value="₹3,190 Cr" /></div>
         <div className="kpi-delta up">▲ 8.7% YoY</div>
         <div className="kpi-caption">Margin 12.8%</div>
       </div>
       <div className="fin-tile reveal">
         <div className="kpi-lab">Cathode production</div>
-        <div className="kpi-val">364 KT</div>
+        <div className="kpi-val"><NumberTicker value="364 KT" /></div>
         <div className="kpi-delta up">▲ 4.1% YoY</div>
         <div className="kpi-caption">91% capacity utilisation</div>
       </div>
       <div className="fin-tile reveal">
         <div className="kpi-lab">Net debt / EBITDA</div>
-        <div className="kpi-val">0.6×</div>
+        <div className="kpi-val"><NumberTicker value="0.6×" /></div>
         <div className="kpi-delta down">▼ 0.2 from FY23</div>
         <div className="kpi-caption">Investment-grade balance sheet</div>
       </div>
@@ -559,7 +1070,7 @@ export default function Home() {
 </section>
 
 {/*  NEWS  */}
-<section className="news">
+<section id="news" className="news">
   <div className="news-head">
     <div>
       <div className="eyebrow reveal">Latest</div>
@@ -570,12 +1081,16 @@ export default function Home() {
     </a>
   </div>
   <div className="news-grid reveal delay-3">
-    <div className="news-hero">
-      <div className="tag">Featured</div>
-      <h3>Sterlite Copper awarded British Safety Council's Sword of Honour — 2024</h3>
-    </div>
     <article className="news-card reveal scroll-zoom">
-      <img src="assets/pillar-operations.png" alt="" />
+      <img src="assets/news-sword-of-honour.jpg" alt="Sword of Honour" />
+      <div className="b">
+        <span className="date">Oct 12 2024 · Featured</span>
+        <h3>Sterlite Copper awarded British Safety Council's Sword of Honour — 2024</h3>
+        <a className="link" href="#">Read more <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
+      </div>
+    </article>
+    <article className="news-card reveal scroll-zoom">
+      <img src="assets/copper_wire_bundles.png" alt="Copper Rod Plant" />
       <div className="b">
         <span className="date">Aug 12 2024 · Press</span>
         <h3>Q1 FY25: Record refined copper output at Silvassa Rod Plant</h3>

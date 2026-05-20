@@ -1,4 +1,86 @@
-import React from 'react';
+import React, { useState, useEffect, useRef } from 'react';
+
+function TypewriterBusinessCTA() {
+  const [eyebrowText, setEyebrowText] = useState('');
+  const [headlineText, setHeadlineText] = useState('');
+  const [isIntersecting, setIsIntersecting] = useState(false);
+  const [activeStep, setActiveStep] = useState(0); // 0: idle, 1: eyebrow, 2: headline, 3: done
+  const containerRef = useRef(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting) {
+        setIsIntersecting(true);
+      } else {
+        setIsIntersecting(false);
+        setActiveStep(0);
+        setEyebrowText('');
+        setHeadlineText('');
+      }
+    }, { threshold: 0.1 });
+
+    if (containerRef.current) {
+      observer.observe(containerRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    if (!isIntersecting) return;
+
+    const startTimeout = setTimeout(() => {
+      setActiveStep(1); // start eyebrow
+    }, 400);
+
+    return () => clearTimeout(startTimeout);
+  }, [isIntersecting]);
+
+  // Eyebrow: Work with us
+  useEffect(() => {
+    if (activeStep !== 1) return;
+    const txt = "Work with us";
+    let idx = 0;
+    const interval = setInterval(() => {
+      setEyebrowText(txt.substring(0, idx + 1));
+      idx++;
+      if (idx >= txt.length) {
+        clearInterval(interval);
+        setTimeout(() => setActiveStep(2), 250);
+      }
+    }, 45);
+    return () => clearInterval(interval);
+  }, [activeStep]);
+
+  // Headline: Ready to place an order or discuss a long-term contract?
+  useEffect(() => {
+    if (activeStep !== 2) return;
+    const txt = "Ready to place an order or discuss a long-term contract?";
+    let idx = 0;
+    const interval = setInterval(() => {
+      setHeadlineText(txt.substring(0, idx + 1));
+      idx++;
+      if (idx >= txt.length) {
+        clearInterval(interval);
+        setActiveStep(3);
+      }
+    }, 30);
+    return () => clearInterval(interval);
+  }, [activeStep]);
+
+  return (
+    <div ref={containerRef}>
+      <div className="eyebrow reveal in" style={{ opacity: 1, transform: 'none' }}>
+        {eyebrowText}
+        {activeStep === 1 && <span className="typewriter-caret">|</span>}
+      </div>
+      <h2 className="reveal delay-1 in" style={{ opacity: 1, transform: 'none' }}>
+        {headlineText}
+        {activeStep === 2 && <span className="typewriter-caret">|</span>}
+      </h2>
+    </div>
+  );
+}
 
 export default function Business() {
   return (
@@ -45,7 +127,7 @@ export default function Business() {
 
 <section className="cta-band">
   <div className="cta-inner">
-    <div><div className="eyebrow reveal">Work with us</div><h2 className="reveal delay-1">Ready to place an order or discuss a long-term contract?</h2></div>
+    <TypewriterBusinessCTA />
     <div className="cta-btns"><a href="buy.html" className="btn-primary"><span className="roll-text"><span data-text="Buy now →">Buy now →</span></span></a><a href="contact.html" className="btn-primary btn-sm"><span className="roll-text"><span data-text="Talk to sales">Talk to sales</span></span></a></div>
   </div>
 </section>

@@ -1,4 +1,86 @@
-import React from 'react';
+import React, { useState, useEffect, useRef } from 'react';
+
+function TypewriterSustainabilityCTA() {
+  const [eyebrowText, setEyebrowText] = useState('');
+  const [headlineText, setHeadlineText] = useState('');
+  const [isIntersecting, setIsIntersecting] = useState(false);
+  const [activeStep, setActiveStep] = useState(0); // 0: idle, 1: eyebrow, 2: headline, 3: done
+  const containerRef = useRef(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting) {
+        setIsIntersecting(true);
+      } else {
+        setIsIntersecting(false);
+        setActiveStep(0);
+        setEyebrowText('');
+        setHeadlineText('');
+      }
+    }, { threshold: 0.1 });
+
+    if (containerRef.current) {
+      observer.observe(containerRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    if (!isIntersecting) return;
+
+    const startTimeout = setTimeout(() => {
+      setActiveStep(1); // start eyebrow
+    }, 400);
+
+    return () => clearTimeout(startTimeout);
+  }, [isIntersecting]);
+
+  // Eyebrow: Deep dive
+  useEffect(() => {
+    if (activeStep !== 1) return;
+    const txt = "Deep dive";
+    let idx = 0;
+    const interval = setInterval(() => {
+      setEyebrowText(txt.substring(0, idx + 1));
+      idx++;
+      if (idx >= txt.length) {
+        clearInterval(interval);
+        setTimeout(() => setActiveStep(2), 250);
+      }
+    }, 45);
+    return () => clearInterval(interval);
+  }, [activeStep]);
+
+  // Headline: Read the full FY24 Sustainability Report
+  useEffect(() => {
+    if (activeStep !== 2) return;
+    const txt = "Read the full FY24 Sustainability Report";
+    let idx = 0;
+    const interval = setInterval(() => {
+      setHeadlineText(txt.substring(0, idx + 1));
+      idx++;
+      if (idx >= txt.length) {
+        clearInterval(interval);
+        setActiveStep(3);
+      }
+    }, 30);
+    return () => clearInterval(interval);
+  }, [activeStep]);
+
+  return (
+    <div ref={containerRef}>
+      <div className="eyebrow reveal in" style={{ opacity: 1, transform: 'none' }}>
+        {eyebrowText}
+        {activeStep === 1 && <span className="typewriter-caret">|</span>}
+      </div>
+      <h2 className="reveal delay-1 in" style={{ opacity: 1, transform: 'none' }}>
+        {headlineText}
+        {activeStep === 2 && <span className="typewriter-caret">|</span>}
+      </h2>
+    </div>
+  );
+}
 
 export default function Sustainability() {
   return (
@@ -57,7 +139,7 @@ export default function Sustainability() {
 
 <section className="cta-band">
   <div className="cta-inner">
-    <div><div className="eyebrow reveal">Deep dive</div><h2 className="reveal delay-1">Read the full FY24 Sustainability Report</h2></div>
+    <TypewriterSustainabilityCTA />
     <div className="cta-btns"><a href="#" className="btn-primary"><span className="roll-text"><span data-text="Download PDF (12.1 MB) →">Download PDF (12.1 MB) →</span></span></a><a href="investors.html" className="btn-primary btn-sm"><span className="roll-text"><span data-text="Governance">Governance</span></span></a></div>
   </div>
 </section>

@@ -11,7 +11,7 @@ export default function Buy() {
     <div className="hero-track">
       <div className="hero-slide active" style={{"backgroundImage":"linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.65)), url('assets/gallery1.png')"}}>
         <div className="hero-kicker">Procurement</div>
-        <h1 className="hero-title">Buy Sterlite<br/>Copper products</h1>
+        <h1 className="hero-title">Buy <span className="modern-brand-text">Sterlite Copper</span><br/>products</h1>
         <p className="hero-sub reveal delay-2">LME Grade-A cathodes, 8mm CCR rods, sulphuric and phosphoric acid — spot contracts and long-term offtake agreements.</p>
       </div>
     </div>

@@ -1,4 +1,94 @@
-import React from 'react';
+import React, { useState, useEffect, useRef } from 'react';
+
+function TypewriterHeader() {
+  const segments = [
+    { text: "Copper is the ", tag: "span", className: "" },
+    { text: "quiet infrastructure", tag: "em", className: "" },
+    { text: " of a country moving forward.", tag: "span", className: "" }
+  ];
+
+  const [visibleText, setVisibleText] = useState([
+    { text: "", tag: "span", className: "" },
+    { text: "", tag: "em", className: "" },
+    { text: "", tag: "span", className: "" }
+  ]);
+  const [isIntersecting, setIsIntersecting] = useState(false);
+  const [isTypingDone, setIsTypingDone] = useState(false);
+  const containerRef = useRef(null);
+  useEffect(() => {
+    const observer = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting) {
+        setIsIntersecting(true);
+      } else {
+        setIsIntersecting(false);
+        setIsTypingDone(false);
+        setVisibleText([
+          { text: "", tag: "span", className: "" },
+          { text: "", tag: "em", className: "" },
+          { text: "", tag: "span", className: "" }
+        ]);
+      }
+    }, { threshold: 0.1 });
+
+    if (containerRef.current) {
+      observer.observe(containerRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    if (!isIntersecting) return;
+
+    const startTimeout = setTimeout(() => {
+      let segmentIdx = 0;
+      let charIdx = 0;
+      let typedSegments = segments.map(seg => ({ ...seg, text: "" }));
+      
+      const interval = setInterval(() => {
+        if (segmentIdx >= segments.length) {
+          clearInterval(interval);
+          setIsTypingDone(true);
+          return;
+        }
+
+        const targetSegment = segments[segmentIdx];
+        typedSegments = typedSegments.map((seg, idx) => {
+          if (idx === segmentIdx) {
+            return { ...seg, text: targetSegment.text.substring(0, charIdx + 1) };
+          }
+          return seg;
+        });
+
+        setVisibleText([...typedSegments]);
+        charIdx++;
+
+        if (charIdx >= targetSegment.text.length) {
+          segmentIdx++;
+          charIdx = 0;
+        }
+      }, 40); // smooth, premium typewriter speed
+
+      return () => clearInterval(interval);
+    }, 600); // Wait for the 3D flip reveal entry animation to complete
+
+    return () => clearTimeout(startTimeout);
+  }, [isIntersecting]);
+
+  return (
+    <h2 ref={containerRef} className="reveal delay-1">
+      {visibleText.map((seg, idx) => {
+        const Tag = seg.tag;
+        return (
+          <Tag key={idx} className={seg.className}>
+            {seg.text}
+          </Tag>
+        );
+      })}
+      <span className={`typewriter-caret ${isTypingDone ? 'done' : 'typing'}`}>|</span>
+    </h2>
+  );
+}
 
 export default function Footer() {
   return (
@@ -7,13 +97,13 @@ export default function Footer() {
 
     {/*  Manifesto + CTA  */}
     <div className="foot-manifesto">
-      <h2 className="reveal delay-1">Copper is the <em>quiet infrastructure</em> of a country moving forward.</h2>
+      <TypewriterHeader />
       <div className="cta-card reveal delay-2">
         <div className="eyebrow">Let's build together</div>
         <p className="reveal">Procurement, partnerships, community initiatives or press — we respond within two working days.</p>
         <div className="btns">
-          <a href="#" className="primary">Contact us <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
-          <a href="#" className="ghost">Buy copper</a>
+          <a href="#" className="primary"><span className="roll-text"><span data-text="Contact us">Contact us</span></span> <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
+          <a href="#" className="ghost"><span className="roll-text"><span data-text="Buy copper">Buy copper</span></span></a>
         </div>
       </div>
     </div>
@@ -117,7 +207,7 @@ export default function Footer() {
     </div>
 
     {/*  Oversized wordmark  */}
-    <div className="foot-wordmark" aria-hidden="true">Sterlite <em>Copper</em></div>
+    <div className="foot-wordmark" aria-hidden="true">sterlite <em>copper</em></div>
 
   </div>
 </footer>

@@ -8,14 +8,14 @@ export default function useCommonSetup() {
   useEffect(() => {
     // Initialize Lenis smooth scroll
     const lenis = new Lenis({
-      duration: 1.2,
+      duration: 2.2,
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
       orientation: 'vertical',
       gestureOrientation: 'vertical',
       smoothWheel: true,
-      wheelMultiplier: 1,
-      smoothTouch: false,
-      touchMultiplier: 2,
+      wheelMultiplier: 0.9,
+      smoothTouch: true,
+      touchMultiplier: 1.5,
       infinite: false,
     });
 
@@ -90,11 +90,14 @@ export default function useCommonSetup() {
 
     // 5. Timeline horizontal scroll
     setupTimelineScroll();
+    // 6. Global Paragraph Typewriter Effect
+    const ioTypewriter = setupParagraphTypewriter();
 
     return () => {
       ioReveal.disconnect();
       ioCount.disconnect();
       ioBars.disconnect();
+      if (ioTypewriter) ioTypewriter.disconnect();
       if (window.heroTimer) clearInterval(window.heroTimer);
       if (window._tlScrollHandler) window.removeEventListener('scroll', window._tlScrollHandler);
       
@@ -315,4 +318,75 @@ function setupEditMode() {
     };
   });
   apply();
+}
+
+function setupParagraphTypewriter() {
+  const paragraphs = document.querySelectorAll('p, h1, h2, h3, h4, h5, h6, .eyebrow, .hero-kicker');
+  if (!paragraphs.length) return null;
+
+  const ioTypewriter = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      const p = e.target;
+      if (e.isIntersecting) {
+        if (!p.dataset.isTyping && !p.dataset.done) {
+          p.dataset.isTyping = 'true';
+          const spans = p.querySelectorAll('.tw-char');
+          let i = 0;
+          if (p.twTimeout) clearTimeout(p.twTimeout);
+          function typeNext() {
+            if (!p.dataset.isTyping) return;
+            if (i < spans.length) {
+              spans[i].style.opacity = '1';
+              i++;
+              p.twTimeout = setTimeout(typeNext, 12);
+            } else {
+              p.dataset.done = 'true';
+              p.dataset.isTyping = '';
+            }
+          }
+          typeNext();
+        }
+      } else {
+        p.dataset.isTyping = '';
+        p.dataset.done = '';
+        const spans = p.querySelectorAll('.tw-char');
+        spans.forEach(s => s.style.opacity = '0');
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+  function wrapTextNodes(node) {
+    if (node.nodeType === Node.TEXT_NODE) {
+      const text = node.textContent;
+      if (text.trim() === '') return;
+      const fragment = document.createDocumentFragment();
+      for (let i = 0; i < text.length; i++) {
+        const char = text[i];
+        const span = document.createElement('span');
+        span.textContent = char;
+        span.className = 'tw-char';
+        span.style.opacity = '0';
+        span.style.transition = 'opacity 0.1s ease-out';
+        if (char === ' ') {
+          span.style.whiteSpace = 'pre';
+        }
+        fragment.appendChild(span);
+      }
+      node.parentNode.replaceChild(fragment, node);
+    } else if (node.nodeType === Node.ELEMENT_NODE) {
+      if (!node.classList.contains('tw-char')) {
+        Array.from(node.childNodes).forEach(wrapTextNodes);
+      }
+    }
+  }
+
+  paragraphs.forEach(p => {
+    if (!p.dataset.twReady) {
+      p.dataset.twReady = 'true';
+      wrapTextNodes(p);
+    }
+    ioTypewriter.observe(p);
+  });
+
+  return ioTypewriter;
 }

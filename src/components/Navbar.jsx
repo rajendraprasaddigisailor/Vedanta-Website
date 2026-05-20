@@ -31,14 +31,14 @@ export default function Navbar() {
             <img className="nav-logo" src="assets/logo.png" alt="Vedanta · Sterlite Copper" />
           </Link>
           <div className="nav-menu">
-            <Link to="/" className={pathname === '/' ? 'active' : ''}>Home</Link>
-            <Link to="/about" className={pathname === '/about' ? 'active' : ''}>About Us</Link>
-            <Link to="/business" className={pathname === '/business' ? 'active' : ''}>Our Business</Link>
-            <Link to="/investors" className={pathname === '/investors' ? 'active' : ''}>Investor Relations</Link>
-            <Link to="/sustainability" className={pathname === '/sustainability' ? 'active' : ''}>Sustainability</Link>
-            <Link to="/news" className={pathname === '/news' ? 'active' : ''}>News & Media</Link>
-            <Link to="/careers" className={pathname === '/careers' ? 'active' : ''}>Careers</Link>
-            <Link to="/contact" className={pathname === '/contact' ? 'active' : ''}>Contact</Link>
+            <Link to="/" className={pathname === '/' ? 'active' : ''}><span className="roll-text"><span data-text="Home">Home</span></span></Link>
+            <Link to="/about" className={pathname === '/about' ? 'active' : ''}><span className="roll-text"><span data-text="About Us">About Us</span></span></Link>
+            <Link to="/business" className={pathname === '/business' ? 'active' : ''}><span className="roll-text"><span data-text="Our Business">Our Business</span></span></Link>
+            <Link to="/investors" className={pathname === '/investors' ? 'active' : ''}><span className="roll-text"><span data-text="Investor Relations">Investor Relations</span></span></Link>
+            <Link to="/sustainability" className={pathname === '/sustainability' ? 'active' : ''}><span className="roll-text"><span data-text="Sustainability">Sustainability</span></span></Link>
+            <Link to="/news" className={pathname === '/news' ? 'active' : ''}><span className="roll-text"><span data-text="News & Media">News & Media</span></span></Link>
+            <Link to="/careers" className={pathname === '/careers' ? 'active' : ''}><span className="roll-text"><span data-text="Careers">Careers</span></span></Link>
+            <Link to="/contact" className={pathname === '/contact' ? 'active' : ''}><span className="roll-text"><span data-text="Contact">Contact</span></span></Link>
           </div>
           <div className="nav-right">
             <button 
